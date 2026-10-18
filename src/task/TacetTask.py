@@ -67,7 +67,8 @@ class TacetTask(WWOneTimeTask, BaseCombatTask):
 
             self.open_boss_book('wuyin')
             index = config.get('Which Tacet Suppression to Farm', 1) - 1
-            self.teleport_to_tacet(index)
+            if not self.teleport_to_tacet(index):
+                return
             self.click_team_challenge()
             while True:
                 self.wait_in_team_and_world(time_out=120)
@@ -110,4 +111,27 @@ class TacetTask(WWOneTimeTask, BaseCombatTask):
         self.info_set('Teleport to Tacet Suppression', index)
         if index >= self.total_number:
             raise IndexError(f'Index out of range, max is {self.total_number}')
-        return self.click_on_book_target(index + 1, self.total_number, self.structure)
+        if not self.click_on_book_target(index + 1, self.total_number, self.structure):
+            # 详情页提示「附近信标无法快速到达」时只剩一个禁用的「前往」，没传送却不判断就会在
+            # click_team_challenge 里等不到组队界面直接抛错，把整个日常任务一起中断（后面的领奖全部跳过）
+            self.log_info('nearby beacon cannot be fast traveled, skip this tacet suppression', notify=True)
+            self._back_to_world_after_skip()
+            return False
+        travel_feature = getattr(self, '_travel_feature', None)
+        if travel_feature is not None and travel_feature != 'team_close':
+            # 走的是书页上的「前往」而不是组队直进：它只负责把队伍送到信标旁，还得再点一次才开始挑战，
+            # 否则下面等组队界面同样等不到
+            self.wait_click_feature(travel_feature, raise_if_not_found=False, time_out=5, click_after_delay=0.5,
+                                    after_sleep=1)
+            if self.is_fast_travel_unavailable():
+                self.log_info('nearby beacon cannot be fast traveled, skip this tacet suppression', notify=True)
+                self._back_to_world_after_skip(esc=False)
+                return False
+        return True
+
+    def _back_to_world_after_skip(self, esc=True):
+        # esc 只关掉详情页/书页；日常任务里 DailyTask 把 ensure_main 劫持成空实现，下一轮 openF2Book 既不会补
+        # esc 也不会发 f2，所以要自己等回到主世界，再继续后面的领奖和附加任务
+        self.back(after_sleep=1)
+        if not self.wait_in_team_and_world(time_out=10, raise_if_not_found=False, esc=esc):
+            self.log_info('not back in world after skipping this tacet suppression, continue anyway')

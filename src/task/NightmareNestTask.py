@@ -2,19 +2,14 @@ import re
 import cv2
 from dataclasses import dataclass
 
-from ok import Logger, find_color_rectangles
+from ok import Logger
 from src.task.BaseCombatTask import BaseCombatTask, CharRevivedException
+from src.task.BaseWWTask import BaseWWTask
 from src.task.WWOneTimeTask import WWOneTimeTask
 
 logger = Logger.get_logger(__name__)
 TRAVEL_FEATURES = ['fast_travel_custom', 'gray_teleport', 'remove_custom']
 CONFIRM_FEATURES = ['confirm_btn_hcenter_vcenter', 'confirm_btn_highlight_hcenter_vcenter']
-# 图鉴详情页显示「附近信标无法快速到达」时，前往按钮被禁用并弹出这条红色警告条，此时该聚落无法传送
-travel_unavailable_color = {
-    'r': (160, 240),
-    'g': (60, 150),
-    'b': (60, 150)
-}
 
 
 @dataclass
@@ -190,11 +185,7 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
         return self._skip_unreachable_nest(nest)
 
     def is_fast_travel_unavailable(self):
-        # 「附近信标无法快速到达」的红条只出现在图鉴详情页下方的按钮区，用颜色定位以免受语言和多行图标排版影响
-        box = self.box_of_screen(0.68, 0.55, 0.98, 0.95, name='travel_unavailable')
-        return bool(find_color_rectangles(self.frame, travel_unavailable_color,
-                                          self.width_of_screen(0.15), self.height_of_screen(0.02),
-                                          threshold=0.8, box=box))
+        return BaseWWTask.is_fast_travel_unavailable(self)
 
     def _skip_unreachable_nest(self, nest):
         if isinstance(nest, NestTarget):

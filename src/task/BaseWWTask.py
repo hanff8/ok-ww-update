@@ -13,6 +13,13 @@ import cv2
 from src.Labels import Labels
 from src.scene.WWScene import WWScene
 
+# 图鉴详情页显示「附近信标无法快速到达」时，前往按钮被禁用并弹出这条红色警告条，此时该目标无法传送
+travel_unavailable_color = {
+    'r': (160, 240),
+    'g': (60, 150),
+    'b': (60, 150)
+}
+
 logger = Logger.get_logger(__name__)
 number_re = re.compile(r'(\d+)')
 stamina_re = re.compile(r'(\d+)/(\d+)')
@@ -1151,6 +1158,7 @@ class BaseWWTask(BaseTask):
         return bar.y / self.height
 
     def click_on_book_target(self, serial_number: int, total_number: int, structure: list[int] = None):
+        self._travel_feature = None
         def get_cross_count(structure, sn):
             current_sum = 0
             cross_count = 0
@@ -1217,7 +1225,15 @@ class BaseWWTask(BaseTask):
         self.click(target, after_sleep=1)
         feature = self.wait_feature(['fast_travel_custom', 'gray_teleport', 'remove_custom', 'team_close'], time_out=10,
                                     settle_time=0.5, raise_if_not_found=True)
+        self._travel_feature = feature.name
         return feature.name == 'team_close'
+
+    def is_fast_travel_unavailable(self):
+        # 「附近信标无法快速到达」的红条只出现在图鉴详情页下方的按钮区，用颜色定位以免受语言和多行图标排版影响
+        box = self.box_of_screen(0.68, 0.55, 0.98, 0.95, name='travel_unavailable')
+        return bool(find_color_rectangles(self.frame, travel_unavailable_color,
+                                          self.width_of_screen(0.15), self.height_of_screen(0.02),
+                                          threshold=0.8, box=box))
 
     def change_time_to_night(self):
         logger.info('change time to night')
