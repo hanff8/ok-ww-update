@@ -1,0 +1,303 @@
+import re
+import cv2
+from dataclasses import dataclass
+
+from ok import Logger, find_color_rectangles
+from src.task.BaseCombatTask import BaseCombatTask, CharRevivedException
+from src.task.WWOneTimeTask import WWOneTimeTask
+
+logger = Logger.get_logger(__name__)
+TRAVEL_FEATURES = ['fast_travel_custom', 'gray_teleport', 'remove_custom']
+CONFIRM_FEATURES = ['confirm_btn_hcenter_vcenter', 'confirm_btn_highlight_hcenter_vcenter']
+# 图鉴详情页显示「附近信标无法快速到达」时，前往按钮被禁用并弹出这条红色警告条，此时该聚落无法传送
+travel_unavailable_color = {
+    'r': (160, 240),
+    'g': (60, 150),
+    'b': (60, 150)
+}
+
+
+@dataclass
+class NestTarget:
+    box: object
+    cache_key: str
+
+
+class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
+    max_nest_deaths = 3
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.default_config = {'_enabled': True}
+        self.trigger_interval = 0.1
+        self.target_enemy_time_out = 10
+        self.name = "🌙 Nightmare Nest Task"
+        self.description = "Auto Farm all Nightmare Nest"
+        self.support_schedule_task = True
+        self.count_re = re.compile(r"(\d{1,2})/(\d{1,2})")
+        self.queues = []
+        self._capture_success = False
+        self._capture_mode = False
+        self._unreachable_nests = set()
+        self._nest_deaths = {}
+        self._nest_tab_of_current_nest = 'go_nest'
+        self.default_config.update({'Which to Farm': ['Nightmare Purification', 'Tacet Discord Nest']})
+        self.config_type['Which to Farm'] = {'type': "multi_selection",
+                                             'options': ['Nightmare Purification', 'Tacet Discord Nest']}
+
+    def run(self):
+        self._capture_mode = False
+        self._capture_success = False
+        self._unreachable_nests.clear()
+        self._nest_deaths.clear()
+        WWOneTimeTask.run(self)
+        self.ensure_main(time_out=30)
+        self._init_queue()
+        self.log_info('opened gray_book_boss')
+        while nest := self.get_nest_to_go():
+            self.combat_nest(nest)
+        self.ensure_main(time_out=30)
+
+    def run_capture_mode(self):
+        self._capture_mode = True
+        self._capture_success = False
+        self._unreachable_nests.clear()
+        self._nest_deaths.clear()
+        WWOneTimeTask.run(self)
+        self.ensure_main(time_out=30)
+        self._init_queue()
+        self.log_info('opened gray_book_boss')
+        while nest := self.get_nest_to_go():
+            self.combat_nest(nest)
+            if self._capture_success:
+                break
+        self.ensure_main(time_out=30)
+
+    def on_combat_check(self):
+        if self._capture_mode:
+            self.pick_f(handle_claim=False)
+            if self.has_echo_notification():
+                return self.reset_to_false(reason='echo captured')
+        return True
+
+    def has_echo_notification(self):
+        if self.find_best_match_in_box(self.box_of_screen(0.078, 0.488, 0.094, 0.514),
+                                       ['char_1_text', 'char_3_text'], 0.6,
+                                       frame_processor=convert_image_to_negative):
+            self._capture_success = True
+        return self._capture_success
+
+    def combat_nest(self, nest):
+        target_box = nest.box if isinstance(nest, NestTarget) else nest
+        self.click(target_box, after_sleep=2)
+        # 详情页提示「附近信标无法快速到达」时只有禁用的「前往」，下面等待传送特征会直接抛错中断整个梦魇步骤
+        # （日常任务里会被兜底成 NightmareNestTask Failed 并截图跳过全部巢穴），所以先判定并跳到下一个聚落
+        if self.is_fast_travel_unavailable():
+            self.log_info('nearby beacon cannot be fast traveled, skip this nest')
+            self._skip_unreachable_nest(nest)
+            return
+        feature = self.wait_feature(['fast_travel_custom', 'gray_teleport', 'remove_custom', 'team_close'], time_out=10,
+                                    settle_time=0.5, raise_if_not_found=True)
+        is_team = feature.name == 'team_close'
+        if is_team:
+            self.click_team_challenge()
+            self.wait_in_team_and_world(time_out=120)
+        else:
+            if not self._travel_to_nest_or_skip(nest):
+                return
+            self.sleep(1)
+            while self.find_f_with_text():
+                self.send_key('f', after_sleep=1)
+                self.wait_in_team_and_world(time_out=40, raise_if_not_found=False)
+            self.sleep(2)
+            self.run_until(self.in_combat, 'w', time_out=10, running=False, target=True)
+        wait_combat_time = 10
+        while True:
+            try:
+                need_find = self.combat_once(wait_combat_time=wait_combat_time, target=True,
+                                             raise_if_not_found=False)
+            except CharRevivedException:
+                if isinstance(nest, NestTarget):
+                    deaths = self._nest_deaths.get(nest.cache_key, 0) + 1
+                    self._nest_deaths[nest.cache_key] = deaths
+                    if deaths >= self.max_nest_deaths:
+                        self._unreachable_nests.add(nest.cache_key)
+                        self.log_info(f'nightmare nest: died {deaths} times, skip this run: {nest.cache_key}',
+                                      notify=True)
+                        return
+                self.log_info('nightmare nest: death recovered, re-enter from F2 book')
+                return
+            captured_early = False
+            if self._capture_mode:
+                if self._capture_success or self.wait_until(self.has_echo_notification, time_out=3):
+                    self.log_info("Captured echo during combat, skipping search.")
+                    captured_early = True
+            if not captured_early:
+                self.sleep(3)
+                if need_find and not self.walk_find_echo(time_out=5, backward_time=2.5):
+                    dropped = self.yolo_find_echo(turn=True, use_color=False, time_out=30)[0]
+                    logger.info(f'farm echo yolo find {dropped}')
+                    if not dropped and not is_team:
+                        # 保底：没有收取到声骸时，重新打开图鉴传送回当前聚落（传送点面朝金色声骸群），再搜索一次
+                        self.log_info('no echo collected, re-teleport to current nest as fallback')
+                        self.ensure_main(time_out=30)
+                        self.openF2Book("gray_book_boss")
+                        getattr(self, self._nest_tab_of_current_nest)()
+                        self.sleep(1)
+                        self.click(target_box, after_sleep=2)
+                        if self.wait_feature(TRAVEL_FEATURES, time_out=5, settle_time=0.5,
+                                            raise_if_not_found=False) and self._travel_to_nest_or_skip(nest):
+                            self.sleep(2)
+                            self.run_until(lambda: False, 'w', time_out=2, running=True)
+                            if not self.walk_find_echo(time_out=5, backward_time=2.5):
+                                dropped = self.yolo_find_echo(turn=True, use_color=False, time_out=30)[0]
+                                logger.info(f'farm echo yolo find after re-teleport {dropped}')
+                            else:
+                                dropped = True
+                                self.log_info('farm echo walk find true after re-teleport')
+                else:
+                    dropped = True
+                    self.log_info(f'farm echo walk find true')
+                self._capture_success = dropped
+            if not self._should_continue_combat_after_pickup():
+                break
+            self.log_info('nightmare nest: combat detected after pickup')
+            wait_combat_time = 1
+        # 与刷全部一致：退本后再结束 combat_nest，避免还在巢穴内回 Daily/开书
+        if is_team:
+            self.esc_world_confirm()
+        self.sleep(1)
+
+    def _should_continue_combat_after_pickup(self):
+        return not self._capture_mode and self.wait_combat(
+            target=True, time_out=3, raise_if_not_found=False)
+
+    def _travel_to_nest_or_skip(self, nest):
+        if self.is_fast_travel_unavailable():
+            self.log_info('nearby beacon cannot be fast traveled, skip this nest')
+            return self._skip_unreachable_nest(nest)
+        travel = self.wait_until(self._find_travel_button, raise_if_not_found=False, time_out=1)
+        if travel:
+            self.click(travel, after_sleep=1)
+            if confirm := self._find_first_feature(CONFIRM_FEATURES, threshold=0.6):
+                self.click(confirm, after_sleep=1)
+
+        button_still_visible = travel and self.find_one(travel.name, threshold=0.7)
+        if travel and not button_still_visible and self.wait_in_team_and_world(
+                time_out=120, raise_if_not_found=False):
+            return True
+
+        return self._skip_unreachable_nest(nest)
+
+    def is_fast_travel_unavailable(self):
+        # 「附近信标无法快速到达」的红条只出现在图鉴详情页下方的按钮区，用颜色定位以免受语言和多行图标排版影响
+        box = self.box_of_screen(0.68, 0.55, 0.98, 0.95, name='travel_unavailable')
+        return bool(find_color_rectangles(self.frame, travel_unavailable_color,
+                                          self.width_of_screen(0.15), self.height_of_screen(0.02),
+                                          threshold=0.8, box=box))
+
+    def _skip_unreachable_nest(self, nest):
+        if isinstance(nest, NestTarget):
+            self._unreachable_nests.add(nest.cache_key)
+            self.log_info(f'nightmare nest unreachable, skip this run: {nest.cache_key}')
+        else:
+            self.log_info('nightmare nest unreachable, skip this run')
+        # esc 只关掉详情页，图鉴（挂在地图上）还开着；日常任务里 DailyTask 把 ensure_main 劫持成空实现，
+        # 所以下一轮 openF2Book 既不会补 esc 也不会发 f2（in_team_and_world 为假），wait_book(0.3) 还会把
+        # 正在关闭的图鉴图标当成打开成功（实测 conf=39），之后所有页签都是空扫描、整个梦魇步骤白跑，
+        # 下一个任务还得自己按 esc 回主世界。这里先按 esc 并等回到主世界，再继续下一个巢穴。
+        self.back(after_sleep=1)
+        if not self.wait_in_team_and_world(time_out=10, raise_if_not_found=False, esc=True):
+            self.log_info('not back in world after skipping this nest, continue anyway')
+        return False
+
+    def _find_travel_button(self):
+        return self._find_first_feature(TRAVEL_FEATURES, threshold=0.7)
+
+    def _find_first_feature(self, feature_names, threshold):
+        for feature_name in feature_names:
+            if feature := self.find_one(feature_name, threshold=threshold):
+                return feature
+
+    def get_nest_to_go(self):
+        self.openF2Book("gray_book_boss")
+
+        while self.queues:
+            self.queues[0]()
+            if nest := self.find_nest():
+                self._nest_tab_of_current_nest = self.queues[0].__name__
+                return nest
+            self.queues.pop(0)
+
+    def _init_queue(self):
+        quests = self.config.get('Which to Farm') or ['Nightmare Purification', 'Tacet Discord Nest']
+        actions = []
+        if 'Tacet Discord Nest' in quests:
+            actions.append(self.go_nest)
+            actions.append(self.go_nest_scroll)
+        if 'Nightmare Purification' in quests:
+            actions.append(self.go_nightmare)
+            actions.append(self.go_nightmare_scroll)
+        self.queues = actions
+
+    def go_nightmare(self):
+        self.open_boss_book('mengyan')
+        self.log_info('go nightmare')
+
+    def go_nightmare_scroll(self):
+        self.open_boss_book('mengyan')
+        self.click(3737 / 3840, 0.54, after_sleep=1)
+        self.log_info('go nightmare scroll')
+
+    def go_nest(self):
+        self.open_boss_book('canxiang')
+
+    def go_nest_scroll(self):
+        self.open_boss_book('canxiang')
+        self.click(0.9730, 0.8806, after_sleep=1)
+
+    def find_nest(self):
+        counts = self.ocr(0.35, 0.25, 1, 0.96, match=self.count_re)
+        for count_box in counts:
+            for match in re.finditer(self.count_re, count_box.name):
+                numerator = match.group(1)
+                denominator = match.group(2)
+                if numerator != denominator and denominator in ['24', '36', '48', '41'] and numerator == '0':
+                    cache_key = self._make_nest_cache_key(count_box, denominator)
+                    if cache_key in self._unreachable_nests:
+                        self.log_info(f'skip cached unreachable nightmare nest: {cache_key}')
+                        continue
+                    self.log_info(f'{count_box} is not complete')
+                    count_box.x = self.width_of_screen(0.9)
+                    count_box.y -= count_box.height * 0.9
+                    count_box.height = 1
+                    count_box.width = 1
+                    return NestTarget(count_box, cache_key)
+
+    def _make_nest_cache_key(self, count_box, denominator):
+        action_name = self.queues[0].__name__ if self.queues else 'unknown'
+        screen_height = max(self.height_of_screen(1), 1)
+        row_y = (count_box.y + count_box.height / 2) / screen_height
+        row_slot = round(row_y / 0.02)
+        # 使用粗粒度行槽位，避免 OCR 坐标轻微抖动导致同一目标被重复点击。
+        return f'{action_name}:{denominator}:{row_slot}'
+
+
+def convert_image_to_negative(img):
+    to_gray = False
+    _mat = img
+    if len(_mat.shape) == 3:
+        to_gray = True
+        _mat = cv2.cvtColor(_mat, cv2.COLOR_BGR2GRAY)
+    _, _mat = cv2.threshold(_mat, 80, 255, cv2.THRESH_BINARY)
+    _mat = cv2.bitwise_not(_mat)
+    if to_gray:
+        _mat = cv2.cvtColor(_mat, cv2.COLOR_GRAY2BGR)
+    return _mat
+
+
+from ok import run_task
+from config import config
+
+if __name__ == "__main__":
+    run_task(config, task=NightmareNestTask, debug=True)
