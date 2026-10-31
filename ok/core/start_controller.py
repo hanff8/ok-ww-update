@@ -12,7 +12,7 @@ logger = Logger.get_logger(__name__)
 
 class StartController:
     STARTED_WINDOW_MIN_SIZE = (100, 100)
-    STARTED_WINDOW_STABLE_SECONDS = 2
+    STARTED_WINDOW_STABLE_SECONDS = 5
     STARTED_WINDOW_POLL_INTERVAL = 0.2
 
     def __init__(self, app_config, exit_event):
@@ -21,6 +21,8 @@ class StartController:
         self.handler = Handler(exit_event, __name__)
         self.start_timeout = app_config.get('start_timeout', 60)
         windows_config = app_config.get('windows') or {}
+        self.window_stable_seconds = windows_config.get(
+            'window_stable_seconds', self.STARTED_WINDOW_STABLE_SECONDS)
         self.start_exe = windows_config.get('start_exe', True)
         self.start_method = windows_config.get('start_method', WINDOWS_START_METHOD_START)
         self.starting = False
@@ -54,6 +56,11 @@ class StartController:
             self.starting = False
 
     def _do_start(self, task=None, exit_after=False):
+        if (owner := getattr(getattr(og, 'executor', None), 'exclusive_owner', None)) is not None:
+            logger.info(f'do_start refused, executor held by {owner}')
+            communicate.starting_emulator.emit(
+                True, self.tr('Cannot start: the app is controlled by {owner}').format(owner=owner), 0)
+            return False
         communicate.starting_emulator.emit(False, None, self.start_timeout)
         tasks_to_enable = []
         try:
@@ -98,6 +105,7 @@ class StartController:
                     return False
             else:
                 logger.info('windows.start_exe is False, skip start_device')
+            self.check_auto_hdr()
             self.check_gpu_driver_post_processing()
 
             def add_task_to_enable(enable_task):
@@ -161,8 +169,8 @@ class StartController:
                         logger.info(f'waiting for started window to stabilize, current size {size[0]}x{size[1]}')
                         stable_size = size
                         stable_since = now
-                    elif now - stable_since >= self.STARTED_WINDOW_STABLE_SECONDS:
-                        logger.info(f'started window size stable for {self.STARTED_WINDOW_STABLE_SECONDS}s: {size[0]}x{size[1]}')
+                    elif now - stable_since >= self.window_stable_seconds:
+                        logger.info(f'started window size stable for {self.window_stable_seconds}s: {size[0]}x{size[1]}')
                         return True
                 else:
                     stable_size = None
@@ -215,6 +223,29 @@ class StartController:
         communicate.starting_emulator.emit(True, None, 0)
         return True
 
+    def check_auto_hdr(self):
+        if not (self.config.get('windows') or {}).get('check_auto_hdr', False):
+            return
+        try:
+            from ok.util.gpu_driver_settings import is_auto_hdr_enabled
+
+            device_manager = og.device_manager
+            device = device_manager.get_preferred_device()
+            if not device or device.get('device') != 'windows':
+                return
+            from ok.device.capture_methods.windows_graphics_hdr import WindowsGraphicsCaptureHDRMethod
+
+            if isinstance(getattr(device_manager, 'capture_method', None), WindowsGraphicsCaptureHDRMethod):
+                return
+            hwnd_window = getattr(device_manager, 'hwnd_window', None)
+            target_exe_path = getattr(hwnd_window, 'exe_full_path', None) or device.get('full_path')
+            if is_auto_hdr_enabled(target_exe_path):
+                message = self.tr('Auto HDR is enabled, tasks might not work correctly!')
+                logger.error(message)
+                alert_error(message, tray=True)
+        except Exception as e:
+            logger.error(f'check_auto_hdr exception: {e}', e)
+
     def check_gpu_driver_post_processing(self):
         try:
             from ok.util.gpu_driver_settings import get_enabled_gpu_driver_post_processing
@@ -238,6 +269,9 @@ class StartController:
                 )
                 for feature in enabled_features
             ]
+            if any(feature.vendor == 'NVIDIA' and feature.feature in (
+                    'Filter Profile', 'RTX HDR', 'RTX Dynamic Vibrance') for feature in enabled_features):
+                warning_lines.append(self.tr('Try using Alt+F3 to turn it off.'))
             logger.warning('\n'.join(warning_lines))
             communicate.notification.emit(
                 '\n'.join(warning_lines),
@@ -354,7 +388,9 @@ class StartController:
     def try_capture_a_frame():
         start = time.time()
         while True:
-            frame = og.device_manager.capture_method.get_frame()
+            # A running executor may own the capture; wait for it rather than
+            # polling a lock it releases only briefly between frames.
+            frame = og.device_manager.capture_method.get_frame(busy_wait=1)
             if frame is not None:
                 return frame
             logger.info(f'try_capture_a_frame: frame is None, retrying...')
