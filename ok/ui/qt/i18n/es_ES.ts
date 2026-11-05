@@ -272,6 +272,10 @@
             <source>Reloaded {count} tasks</source>
             <translation>Se han recargado {count} tareas</translation>
         </message>
+        <message>
+            <source>The app is controlled by {owner}</source>
+            <translation>{owner} está controlando la aplicación</translation>
+        </message>
     </context>
     <context>
         <name>GlobalConfigCard</name>
@@ -489,6 +493,58 @@
             <source>Run Code</source>
             <translation>Ejecutar código</translation>
         </message>
+        <message>
+            <source>Import failed: {error}</source>
+            <translation>Error al importar: {error}</translation>
+        </message>
+        <message>
+            <source>Develop</source>
+            <translation>Desarrollo</translation>
+        </message>
+        <message>
+            <source>Diagnosis</source>
+            <translation>Diagnóstico</translation>
+        </message>
+        <message>
+            <source>Disconnect</source>
+            <translation>Desconectar</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>Juego</translation>
+        </message>
+        <message>
+            <source>Log</source>
+            <translation>Registro</translation>
+        </message>
+        <message>
+            <source>Remote Control</source>
+            <translation>Control remoto</translation>
+        </message>
+        <message>
+            <source>Run</source>
+            <translation>Ejecutar</translation>
+        </message>
+        <message>
+            <source>Success</source>
+            <translation>Éxito</translation>
+        </message>
+        <message>
+            <source>{owner} is controlling the app. Other tasks are stopped.</source>
+            <translation>{owner} está controlando la aplicación. Las demás tareas están detenidas.</translation>
+        </message>
+        <message>
+            <source>Cancel</source>
+            <translation>Cancelar</translation>
+        </message>
+        <message>
+            <source>New version available</source>
+            <translation>Nueva versión disponible</translation>
+        </message>
+        <message>
+            <source>Version {version} is available.</source>
+            <translation>La versión {version} está disponible.</translation>
+        </message>
     </context>
     <context>
         <name>MessageWindow</name>
@@ -542,6 +598,10 @@
         <message>
             <source>Search options...</source>
             <translation>Buscar opciones...</translation>
+        </message>
+        <message>
+            <source>Edit List</source>
+            <translation>Editar lista</translation>
         </message>
     </context>
     <context>
@@ -715,6 +775,26 @@
             <source>Configuration takes effect after restart</source>
             <translation>La configuración se aplicará después de reiniciar</translation>
         </message>
+        <message>
+            <source>Window Material</source>
+            <translation>Material de la ventana</translation>
+        </message>
+        <message>
+            <source>Mica tints the window with your wallpaper, Acrylic blurs what is behind it</source>
+            <translation>Mica tiñe la ventana con tu fondo de pantalla; Acrílico desenfoca lo que hay detrás</translation>
+        </message>
+        <message>
+            <source>Mica</source>
+            <translation>Mica</translation>
+        </message>
+        <message>
+            <source>Acrylic</source>
+            <translation>Acrílico</translation>
+        </message>
+        <message>
+            <source>None</source>
+            <translation>Ninguno</translation>
+        </message>
     </context>
     <context>
         <name>StartButton</name>
@@ -725,6 +805,14 @@
         <message>
             <source>Pause All</source>
             <translation>Pausar todo</translation>
+        </message>
+        <message>
+            <source>Error</source>
+            <translation>Error</translation>
+        </message>
+        <message>
+            <source>No Task to Run, Please Enable Task First!</source>
+            <translation>No hay tareas para ejecutar. ¡Active una tarea primero!</translation>
         </message>
     </context>
     <context>
@@ -977,6 +1065,14 @@
         <message>
             <source>View Log</source>
             <translation>Ver registro</translation>
+        </message>
+        <message>
+            <source>Please Start First</source>
+            <translation>Inicie primero</translation>
+        </message>
+        <message>
+            <source>Browser</source>
+            <translation>Navegador</translation>
         </message>
     </context>
     <context>
@@ -1800,6 +1896,86 @@
             <source>Allow local coding agents to control this app and run Python code</source>
             <translation>Permitir que los agentes de programación locales controlen esta aplicación y ejecuten código Python</translation>
         </message>
+        <message>
+            <source>PC version requires admin privileges, Please restart this app with admin privileges!</source>
+            <translation>La versión de PC requiere privilegios de administrador, ¡por favor, reinicia esta aplicación con privilegios de administrador!</translation>
+        </message>
+        <message>
+            <source>No game selected!</source>
+            <translation>¡No se ha seleccionado ningún juego!</translation>
+        </message>
+        <message>
+            <source>Capture failed, please check game window</source>
+            <translation>Captura fallida, por favor, comprueba la ventana del juego</translation>
+        </message>
+        <message>
+            <source>Game path does not exist, Please open game manually!</source>
+            <translation>La ruta del juego no existe, ¡por favor, abre el juego manualmente!</translation>
+        </message>
+        <message>
+            <source>Start game timeout!</source>
+            <translation>¡Tiempo de inicio del juego agotado!</translation>
+        </message>
+        <message>
+            <source>Window is minimized or out of screen, and don't use full-screen exclusive mode!</source>
+            <translation>La ventana está minimizada o fuera de la pantalla, ¡y no uses el modo de pantalla completa exclusiva!</translation>
+        </message>
+        <message>
+            <source>Start game failed, please start game first</source>
+            <translation>Error al iniciar el juego, por favor, inicia el juego primero</translation>
+        </message>
+        <message>
+            <source>{} is not connected, please select the game window.</source>
+            <translation>{} no está conectada, por favor, selecciona la ventana del juego y el método de captura.</translation>
+        </message>
+        <message>
+            <source>Selected capture method is not supported by the game or your system!</source>
+            <translation>¡El método de captura seleccionado no es compatible con el juego o tu sistema!</translation>
+        </message>
+        <message>
+            <source>Image resource load failed, please try install again.(Don't put the app in Downloads folder)</source>
+            <translation>Falló la carga del recurso de imagen, por favor, intenta instalar de nuevo. (No pongas la aplicación en la carpeta de Descargas)</translation>
+        </message>
+        <message>
+            <source>Emulator is not connected, start the emulator first!</source>
+            <translation>El emulador no está conectado, ¡inicia el emulador primero!</translation>
+        </message>
+        <message>
+            <source>Can't start game, make sure the game is installed</source>
+            <translation>No se puede iniciar el juego, asegúrate de que el juego está instalado</translation>
+        </message>
+        <message>
+            <source>NPU inferring Error, you might need to update the Intel NPU driver!</source>
+            <translation>¡Error de inferencia de la NPU, es posible que necesite actualizar el controlador de la NPU de Intel!</translation>
+        </message>
+        <message>
+            <source>Export failed</source>
+            <translation>Error al exportar</translation>
+        </message>
+        <message>
+            <source>Cannot start: the app is controlled by {owner}</source>
+            <translation>No se puede iniciar: {owner} está controlando la aplicación</translation>
+        </message>
+        <message>
+            <source>Cannot start {name}: the app is controlled by {owner}</source>
+            <translation>No se puede iniciar {name}: {owner} está controlando la aplicación</translation>
+        </message>
+        <message>
+            <source>Start failed: {error}</source>
+            <translation>Error al iniciar: {error}</translation>
+        </message>
+        <message>
+            <source>Windows Graphics Capture is busy</source>
+            <translation>Windows Graphics Capture está ocupado</translation>
+        </message>
+        <message>
+            <source>Windows Graphics Capture is not supported on this system.</source>
+            <translation>Este sistema no admite Windows Graphics Capture.</translation>
+        </message>
+        <message>
+            <source>Paused because browser exited</source>
+            <translation>En pausa porque se cerró el navegador</translation>
+        </message>
     </context>
     <context>
         <name>ScheduleTaskTable</name>
@@ -1965,6 +2141,26 @@
         <message>
             <source>Cancel</source>
             <translation>Cancelar</translation>
+        </message>
+        <message>
+            <source>Modify</source>
+            <translation>Modificar</translation>
+        </message>
+        <message>
+            <source>Modify Schedule Task</source>
+            <translation>Modificar tarea programada</translation>
+        </message>
+        <message>
+            <source>Task Index (-t)</source>
+            <translation>Índice de tarea (-t)</translation>
+        </message>
+        <message>
+            <source>Task Name</source>
+            <translation>Nombre de la tarea</translation>
+        </message>
+        <message>
+            <source>Windows runs the app with this task at the chosen time, even when it is closed.</source>
+            <translation>Windows abre la aplicación y ejecuta esta tarea a la hora elegida, aunque esté cerrada.</translation>
         </message>
     </context>
     <context>
@@ -2160,6 +2356,26 @@
             <source>Failed to create task</source>
             <translation>Error al crear la tarea</translation>
         </message>
+        <message>
+            <source>Current App</source>
+            <translation>Aplicación actual</translation>
+        </message>
+        <message>
+            <source>No scheduled tasks</source>
+            <translation>No hay tareas programadas</translation>
+        </message>
+        <message>
+            <source>Run a task every day, week or month without opening the app.</source>
+            <translation>Ejecuta una tarea cada día, semana o mes sin abrir la aplicación.</translation>
+        </message>
+        <message>
+            <source>Task Schedule</source>
+            <translation>Programación de tareas</translation>
+        </message>
+        <message>
+            <source>Windows Task Scheduler starts the app and runs these tasks, even when the app is closed.</source>
+            <translation>El Programador de tareas de Windows abre la aplicación y ejecuta estas tareas, aunque esté cerrada.</translation>
+        </message>
     </context>
     <context>
         <name>MarkUpWindow</name>
@@ -2182,6 +2398,26 @@
         <message>
             <source>Right click to copy color</source>
             <translation>Clic derecho para copiar color</translation>
+        </message>
+        <message>
+            <source>Features</source>
+            <translation>Características</translation>
+        </message>
+        <message>
+            <source>Next image (→)</source>
+            <translation>Imagen siguiente (→)</translation>
+        </message>
+        <message>
+            <source>No features yet. Press R and click two corners to draw one.</source>
+            <translation>Aún no hay características. Pulsa R y haz clic en dos esquinas para dibujar una.</translation>
+        </message>
+        <message>
+            <source>Previous image (←)</source>
+            <translation>Imagen anterior (←)</translation>
+        </message>
+        <message>
+            <source>Scroll to zoom  ·  Drag empty space to pan  ·  Drag a box to move it, its edges to resize  ·  Right click to copy the color  ·  Changes save automatically</source>
+            <translation>Rueda para ampliar  ·  Arrastra un espacio vacío para desplazarte  ·  Arrastra un recuadro para moverlo y sus bordes para redimensionarlo  ·  Clic derecho para copiar el color  ·  Los cambios se guardan solos</translation>
         </message>
     </context>
     <context>
@@ -2221,6 +2457,10 @@
         <message>
             <source>Already exists in '{}'</source>
             <translation>Ya existe en '{}'</translation>
+        </message>
+        <message>
+            <source>Name the feature tasks will look for.</source>
+            <translation>Pon nombre a la característica que buscarán las tareas.</translation>
         </message>
     </context>
     <context>
@@ -2805,6 +3045,58 @@
             <source>Guide</source>
             <translation>Guía</translation>
         </message>
+        <message>
+            <source>Error deleting task: {error}</source>
+            <translation>Error al eliminar la tarea: {error}</translation>
+        </message>
+        <message>
+            <source>Error creating task: {error}</source>
+            <translation>Error al crear la tarea: {error}</translation>
+        </message>
+        <message>
+            <source>Error copying task: {error}</source>
+            <translation>Error al copiar la tarea: {error}</translation>
+        </message>
+        <message>
+            <source>Class Name (English only)</source>
+            <translation>Nombre de clase (solo letras inglesas)</translation>
+        </message>
+        <message>
+            <source>Click a call to insert it at the cursor.</source>
+            <translation>Haz clic en una llamada para insertarla en el cursor.</translation>
+        </message>
+        <message>
+            <source>Confirm</source>
+            <translation>Confirmar</translation>
+        </message>
+        <message>
+            <source>Create a task from scratch or copy an existing one to start.</source>
+            <translation>Crea una tarea desde cero o copia una existente para empezar.</translation>
+        </message>
+        <message>
+            <source>Description (Optional)</source>
+            <translation>Descripción (opcional)</translation>
+        </message>
+        <message>
+            <source>Don't Save</source>
+            <translation>No guardar</translation>
+        </message>
+        <message>
+            <source>No scripts yet</source>
+            <translation>Aún no hay scripts</translation>
+        </message>
+        <message>
+            <source>Select task to copy...</source>
+            <translation>Selecciona la tarea a copiar...</translation>
+        </message>
+        <message>
+            <source>Task Name</source>
+            <translation>Nombre de la tarea</translation>
+        </message>
+        <message>
+            <source>Templates</source>
+            <translation>Plantillas</translation>
+        </message>
     </context>
     <context>
         <name>CreateTaskDialog</name>
@@ -2966,6 +3258,26 @@
             <source>Compress (obsolete)</source>
             <translation>Comprimir (obsoleto)</translation>
         </message>
+        <message>
+            <source>Screenshot failed: {e}</source>
+            <translation>Error al capturar la pantalla: {e}</translation>
+        </message>
+        <message>
+            <source>Save failed: {e}</source>
+            <translation>Error al guardar: {e}</translation>
+        </message>
+        <message>
+            <source>Delete failed: {e}</source>
+            <translation>Error al eliminar: {e}</translation>
+        </message>
+        <message>
+            <source>Could not write screenshot to {path}</source>
+            <translation>No se pudo guardar la captura de pantalla en {path}</translation>
+        </message>
+        <message>
+            <source>Take a screenshot of the game, then mark up the features tasks should find.</source>
+            <translation>Haz una captura del juego y marca las características que deben encontrar las tareas.</translation>
+        </message>
     </context>
     <context>
         <name>TemplateInputDialog</name>
@@ -2976,6 +3288,10 @@
         <message>
             <source>Cancel</source>
             <translation>Cancelar</translation>
+        </message>
+        <message>
+            <source>Parameter '{param_name}' is required!</source>
+            <translation>¡El parámetro «{param_name}» es obligatorio!</translation>
         </message>
     </context>
     <context>
@@ -3003,6 +3319,14 @@
         <message>
             <source>BrowserInteraction</source>
             <translation>BrowserInteraction - Segundo plano</translation>
+        </message>
+        <message>
+            <source>Default Interaction</source>
+            <translation>Interacción predeterminada</translation>
+        </message>
+        <message>
+            <source>WindowsInteraction</source>
+            <translation>Interacción de Windows</translation>
         </message>
     </context>
     <context>
@@ -3037,6 +3361,22 @@
         <message>
             <source>Confirm Delete</source>
             <translation>Confirmar eliminación</translation>
+        </message>
+        <message>
+            <source>Copy annotation</source>
+            <translation>Copiar anotación</translation>
+        </message>
+        <message>
+            <source>Copy color</source>
+            <translation>Copiar color</translation>
+        </message>
+        <message>
+            <source>Delete</source>
+            <translation>Eliminar</translation>
+        </message>
+        <message>
+            <source>Modify</source>
+            <translation>Modificar</translation>
         </message>
     </context>
     <context>
@@ -3276,6 +3616,22 @@
             <source>Backup cleanup pending. Restart to retry.</source>
             <translation>Limpieza de copias pendiente. Reinicia para reintentar.</translation>
         </message>
+        <message>
+            <source>The release archive belongs to a different plugin</source>
+            <translation>El archivo de la versión pertenece a otro complemento</translation>
+        </message>
+        <message>
+            <source>The release archive is not a newer plugin version</source>
+            <translation>El archivo de la versión no contiene una versión más reciente del complemento</translation>
+        </message>
+        <message>
+            <source>Add a plugin from a ZIP file or a GitHub release.</source>
+            <translation>Añade un complemento desde un archivo ZIP o una versión de GitHub.</translation>
+        </message>
+        <message>
+            <source>From GitHub: {}</source>
+            <translation>Desde GitHub: {}</translation>
+        </message>
     </context>
     <context>
         <name>LabelAndMcpServer</name>
@@ -3298,6 +3654,220 @@
         <message>
             <source>No</source>
             <translation>No</translation>
+        </message>
+    </context>
+    <context>
+        <name>JobControls</name>
+        <message>
+            <source>The app is controlled by {owner}</source>
+            <translation>{owner} está controlando la aplicación</translation>
+        </message>
+        <message>
+            <source>Failed after {seconds}s</source>
+            <translation>Error tras {seconds} s</translation>
+        </message>
+    </context>
+    <context>
+        <name>ConnectionPopover</name>
+        <message>
+            <source>Game window</source>
+            <translation>Ventana del juego</translation>
+        </message>
+        <message>
+            <source>Open folder</source>
+            <translation>Abrir carpeta</translation>
+        </message>
+    </context>
+    <context>
+        <name>DiagnosisPage</name>
+        <message>
+            <source>Boxes</source>
+            <translation>Recuadros</translation>
+        </message>
+        <message>
+            <source>Captures, OCR results and task screenshots appear here.</source>
+            <translation>Aquí aparecen las capturas, los resultados de OCR y las capturas de las tareas.</translation>
+        </message>
+        <message>
+            <source>Developer</source>
+            <translation>Desarrollador</translation>
+        </message>
+        <message>
+            <source>Dump Threads</source>
+            <translation>Volcar hilos</translation>
+        </message>
+        <message>
+            <source>No screenshot yet. Capture one to see it here.</source>
+            <translation>Aún no hay capturas. Haz una para verla aquí.</translation>
+        </message>
+        <message>
+            <source>No text found</source>
+            <translation>No se encontró texto</translation>
+        </message>
+        <message>
+            <source>Open</source>
+            <translation>Abrir</translation>
+        </message>
+        <message>
+            <source>Open image</source>
+            <translation>Abrir imagen</translation>
+        </message>
+        <message>
+            <source>Open screenshot folder</source>
+            <translation>Abrir carpeta de capturas</translation>
+        </message>
+        <message>
+            <source>Original</source>
+            <translation>Original</translation>
+        </message>
+        <message>
+            <source>Recent</source>
+            <translation>Recientes</translation>
+        </message>
+        <message>
+            <source>Run OCR on the current frame and save a screenshot with the text boxes</source>
+            <translation>Ejecuta OCR en el fotograma actual y guarda una captura con los recuadros de texto</translation>
+        </message>
+        <message>
+            <source>Saved to {path}</source>
+            <translation>Guardado en {path}</translation>
+        </message>
+        <message>
+            <source>Screenshots</source>
+            <translation>Capturas</translation>
+        </message>
+        <message>
+            <source>Show in folder</source>
+            <translation>Mostrar en la carpeta</translation>
+        </message>
+        <message>
+            <source>Write every thread's stack to logs/thread_dumps.txt</source>
+            <translation>Escribe la pila de cada hilo en logs/thread_dumps.txt</translation>
+        </message>
+    </context>
+    <context>
+        <name>Dialog</name>
+        <message>
+            <source>Cancel</source>
+            <translation>Cancelar</translation>
+        </message>
+        <message>
+            <source>OK</source>
+            <translation>Aceptar</translation>
+        </message>
+    </context>
+    <context>
+        <name>LogPage</name>
+        <message>
+            <source>Jump to latest</source>
+            <translation>Ir al final</translation>
+        </message>
+        <message>
+            <source>lines</source>
+            <translation>líneas</translation>
+        </message>
+    </context>
+    <context>
+        <name>NavigationView</name>
+        <message>
+            <source>Collapse</source>
+            <translation>Contraer</translation>
+        </message>
+        <message>
+            <source>Expand</source>
+            <translation>Expandir</translation>
+        </message>
+    </context>
+    <context>
+        <name>RunBar</name>
+        <message>
+            <source>+{count} queued</source>
+            <translation>+{count} en cola</translation>
+        </message>
+        <message>
+            <source>Cancel</source>
+            <translation>Cancelar</translation>
+        </message>
+        <message>
+            <source>Cancel this task</source>
+            <translation>Cancelar esta tarea</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>Juego</translation>
+        </message>
+        <message>
+            <source>Launches the game if needed, then runs triggers and queued tasks</source>
+            <translation>Abre el juego si hace falta y luego ejecuta los disparadores y las tareas en cola</translation>
+        </message>
+        <message>
+            <source>Launching {name}</source>
+            <translation>Iniciando {name}</translation>
+        </message>
+        <message>
+            <source>No game selected</source>
+            <translation>Ningún juego seleccionado</translation>
+        </message>
+        <message>
+            <source>Pause {name}</source>
+            <translation>Pausar {name}</translation>
+        </message>
+        <message>
+            <source>Start {name}</source>
+            <translation>Iniciar {name}</translation>
+        </message>
+    </context>
+    <context>
+        <name>TaskDetail</name>
+        <message>
+            <source>This task has no settings.</source>
+            <translation>Esta tarea no tiene ajustes.</translation>
+        </message>
+    </context>
+    <context>
+        <name>TasksPage</name>
+        <message>
+            <source>All</source>
+            <translation>Todas</translation>
+        </message>
+        <message>
+            <source>More actions</source>
+            <translation>Más acciones</translation>
+        </message>
+        <message>
+            <source>On-demand</source>
+            <translation>Manuales</translation>
+        </message>
+        <message>
+            <source>Paused</source>
+            <translation>En pausa</translation>
+        </message>
+        <message>
+            <source>Queued</source>
+            <translation>En cola</translation>
+        </message>
+        <message>
+            <source>Run task</source>
+            <translation>Ejecutar tarea</translation>
+        </message>
+        <message>
+            <source>Select a task to see its settings.</source>
+            <translation>Selecciona una tarea para ver sus ajustes.</translation>
+        </message>
+        <message>
+            <source>Settings</source>
+            <translation>Ajustes</translation>
+        </message>
+        <message>
+            <source>Triggers</source>
+            <translation>Disparadores</translation>
+        </message>
+    </context>
+    <context>
+        <name>Toast</name>
+        <message>
+            <source>Close</source>
+            <translation>Cerrar</translation>
         </message>
     </context>
 </TS>

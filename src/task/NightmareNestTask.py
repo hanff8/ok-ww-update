@@ -6,6 +6,7 @@ from ok import Logger
 from src.task.BaseCombatTask import BaseCombatTask, CharRevivedException
 from src.task.BaseWWTask import BaseWWTask
 from src.task.WWOneTimeTask import WWOneTimeTask
+from src.task.task_icons import task_icon
 
 logger = Logger.get_logger(__name__)
 TRAVEL_FEATURES = ['fast_travel_custom', 'gray_teleport', 'remove_custom']
@@ -27,6 +28,9 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
         self.trigger_interval = 0.1
         self.target_enemy_time_out = 10
         self.name = "🌙 Nightmare Nest Task"
+        self.icon = task_icon('nightmare')
+        self.group_name = 'Daily Activities'
+        self.group_icon = task_icon('category-daily')
         self.description = "Auto Farm all Nightmare Nest"
         self.support_schedule_task = True
         self.count_re = re.compile(r"(\d{1,2})/(\d{1,2})")
@@ -48,7 +52,7 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
         WWOneTimeTask.run(self)
         self.ensure_main(time_out=30)
         self._init_queue()
-        self.log_info('opened gray_book_boss')
+        self.log_info(self.tr('opened gray_book_boss'))
         while nest := self.get_nest_to_go():
             self.combat_nest(nest)
         self.ensure_main(time_out=30)
@@ -61,7 +65,7 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
         WWOneTimeTask.run(self)
         self.ensure_main(time_out=30)
         self._init_queue()
-        self.log_info('opened gray_book_boss')
+        self.log_info(self.tr('opened gray_book_boss'))
         while nest := self.get_nest_to_go():
             self.combat_nest(nest)
             if self._capture_success:
@@ -117,15 +121,15 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
                     self._nest_deaths[nest.cache_key] = deaths
                     if deaths >= self.max_nest_deaths:
                         self._unreachable_nests.add(nest.cache_key)
-                        self.log_info(f'nightmare nest: died {deaths} times, skip this run: {nest.cache_key}',
+                        self.log_info(self.tr('nightmare nest: died {deaths} times, skip this run: {cache_key}').format(deaths=deaths, cache_key=nest.cache_key),
                                       notify=True)
                         return
-                self.log_info('nightmare nest: death recovered, re-enter from F2 book')
+                self.log_info(self.tr('nightmare nest: death recovered, re-enter from F2 book'))
                 return
             captured_early = False
             if self._capture_mode:
                 if self._capture_success or self.wait_until(self.has_echo_notification, time_out=3):
-                    self.log_info("Captured echo during combat, skipping search.")
+                    self.log_info(self.tr('Captured echo during combat, skipping search.'))
                     captured_early = True
             if not captured_early:
                 self.sleep(3)
@@ -134,7 +138,7 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
                     logger.info(f'farm echo yolo find {dropped}')
                     if not dropped and not is_team:
                         # 保底：没有收取到声骸时，重新打开图鉴传送回当前聚落（传送点面朝金色声骸群），再搜索一次
-                        self.log_info('no echo collected, re-teleport to current nest as fallback')
+                        self.log_info(self.tr('no echo collected, re-teleport to current nest as fallback'))
                         self.ensure_main(time_out=30)
                         self.openF2Book("gray_book_boss")
                         getattr(self, self._nest_tab_of_current_nest)()
@@ -149,14 +153,14 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
                                 logger.info(f'farm echo yolo find after re-teleport {dropped}')
                             else:
                                 dropped = True
-                                self.log_info('farm echo walk find true after re-teleport')
+                                self.log_info(self.tr('farm echo walk find true after re-teleport'))
                 else:
                     dropped = True
-                    self.log_info(f'farm echo walk find true')
+                    self.log_info(self.tr('farm echo walk find true'))
                 self._capture_success = dropped
             if not self._should_continue_combat_after_pickup():
                 break
-            self.log_info('nightmare nest: combat detected after pickup')
+            self.log_info(self.tr('nightmare nest: combat detected after pickup'))
             wait_combat_time = 1
         # 与刷全部一致：退本后再结束 combat_nest，避免还在巢穴内回 Daily/开书
         if is_team:
@@ -190,9 +194,9 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
     def _skip_unreachable_nest(self, nest):
         if isinstance(nest, NestTarget):
             self._unreachable_nests.add(nest.cache_key)
-            self.log_info(f'nightmare nest unreachable, skip this run: {nest.cache_key}')
+            self.log_info(self.tr('nightmare nest unreachable, skip this run: {cache_key}').format(cache_key=nest.cache_key))
         else:
-            self.log_info('nightmare nest unreachable, skip this run')
+            self.log_info(self.tr('nightmare nest unreachable, skip this run'))
         # esc 只关掉详情页，图鉴（挂在地图上）还开着；日常任务里 DailyTask 把 ensure_main 劫持成空实现，
         # 所以下一轮 openF2Book 既不会补 esc 也不会发 f2（in_team_and_world 为假），wait_book(0.3) 还会把
         # 正在关闭的图鉴图标当成打开成功（实测 conf=39），之后所有页签都是空扫描、整个梦魇步骤白跑，
@@ -233,12 +237,12 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
 
     def go_nightmare(self):
         self.open_boss_book('mengyan')
-        self.log_info('go nightmare')
+        self.log_info(self.tr('go nightmare'))
 
     def go_nightmare_scroll(self):
         self.open_boss_book('mengyan')
         self.click(3737 / 3840, 0.54, after_sleep=1)
-        self.log_info('go nightmare scroll')
+        self.log_info(self.tr('go nightmare scroll'))
 
     def go_nest(self):
         self.open_boss_book('canxiang')
@@ -256,9 +260,9 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
                 if numerator != denominator and denominator in ['24', '36', '48', '41'] and numerator == '0':
                     cache_key = self._make_nest_cache_key(count_box, denominator)
                     if cache_key in self._unreachable_nests:
-                        self.log_info(f'skip cached unreachable nightmare nest: {cache_key}')
+                        self.log_info(self.tr('skip cached unreachable nightmare nest: {cache_key}').format(cache_key=cache_key))
                         continue
-                    self.log_info(f'{count_box} is not complete')
+                    self.log_info(self.tr('{count_box} is not complete').format(count_box=count_box))
                     count_box.x = self.width_of_screen(0.9)
                     count_box.y -= count_box.height * 0.9
                     count_box.height = 1

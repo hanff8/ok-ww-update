@@ -1,11 +1,13 @@
 import json
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import (QAbstractItemView, QHBoxLayout, QPushButton, QSpinBox, QTableWidget,
-                               QTableWidgetItem, QVBoxLayout, QWidget)
-from qfluentwidgets import (BodyLabel, CheckBox, FluentIcon, MessageBox, MessageBoxBase, PrimaryPushButton,
-                            SingleDirectionScrollArea, TitleLabel)
-from ok.gui.widget.CustomTab import CustomTab
+from PySide6.QtWidgets import (QAbstractItemView, QCheckBox, QHBoxLayout, QScrollArea, QSpinBox,
+                               QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+from ok.ui.qt.kit.buttons import Button
+from ok.ui.qt.kit.dialogs import Dialog
+from ok.ui.qt.kit.feedback import show_toast
+from ok.ui.qt.kit.labels import Label
+from ok.ui.qt.widget.CustomTab import CustomTab
 
 from src.task.TaskOrchestrationTask import PLAN_PATH
 
@@ -41,27 +43,22 @@ class _OrchestrationTable(QTableWidget):
         callback(source, target)
 
 
-class _AddTaskDialog(MessageBoxBase):
+class _AddTaskDialog(Dialog):
     """Pick which built-in tasks to append, instead of appending them blind."""
 
     def __init__(self, tasks, parent=None):
-        super().__init__(parent)
+        super().__init__(parent, '添加子任务', '勾选要参与编排的内置任务：',
+                         ok_text='添加', cancel_text='取消')
         self.tasks = list(tasks)
         self.checkboxes = []
-        self.setWindowTitle('添加子任务')
-        self.yesButton.setText('添加')
-        self.cancelButton.setText('取消')
-        self.viewLayout.addWidget(TitleLabel('添加子任务', self.widget))
-        self.viewLayout.addWidget(BodyLabel('勾选要参与编排的内置任务：', self.widget))
-
-        self.list_area = SingleDirectionScrollArea(self.widget)
+        self.list_area = QScrollArea(self.panel)
         container = QWidget(self.list_area)
         box_layout = QVBoxLayout(container)
         box_layout.setContentsMargins(0, 0, 8, 0)
         box_layout.setSpacing(4)
         box_layout.setAlignment(Qt.AlignTop)
         for task in self.tasks:
-            checkbox = CheckBox(task.name, container)
+            checkbox = QCheckBox(task.name, container)
             checkbox.stateChanged.connect(self._sync_yes_button)
             self.checkboxes.append(checkbox)
             box_layout.addWidget(checkbox, 0, Qt.AlignTop)
@@ -69,11 +66,11 @@ class _AddTaskDialog(MessageBoxBase):
         self.list_area.setWidgetResizable(True)
         self.list_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.list_area.setFixedHeight(min(34 * len(self.tasks) + 8, 320))
-        self.viewLayout.addWidget(self.list_area)
+        self.body.addWidget(self.list_area)
         self._sync_yes_button()
 
     def _sync_yes_button(self):
-        self.yesButton.setEnabled(any(box.isChecked() for box in self.checkboxes))
+        self.ok_button.setEnabled(any(box.isChecked() for box in self.checkboxes))
 
     def checked_tasks(self):
         return [task for task, box in zip(self.tasks, self.checkboxes) if box.isChecked()]
@@ -86,12 +83,12 @@ class TaskOrchestrationTab(CustomTab):
 
     @property
     def icon(self):
-        return FluentIcon.MENU
+        return 'tasks'
 
     def __init__(self):
         super().__init__()
         self.loaded_plan = []
-        self.add_widget(BodyLabel('任务编排：拖动行调整执行顺序，并为每个子任务设置执行次数。'))
+        self.add_widget(Label('任务编排：拖动行调整执行顺序，并为每个子任务设置执行次数。', 'secondary'))
         self.table = _OrchestrationTable(0, 2, self.view)
         self.table.row_moved = self._move_row
         self.table.setHorizontalHeaderLabels(['子任务', '执行次数'])
@@ -105,9 +102,9 @@ class TaskOrchestrationTab(CustomTab):
         self.table.horizontalHeader().setStretchLastSection(False)
         self.add_widget(self.table, 1)
         buttons = QHBoxLayout()
-        self.add_button = QPushButton('添加子任务')
-        self.remove_button = QPushButton('移除选中')
-        self.save_button = PrimaryPushButton('保存编排')
+        self.add_button = Button('添加子任务')
+        self.remove_button = Button('移除选中')
+        self.save_button = Button('保存编排', variant='primary')
         self.add_button.clicked.connect(self._add_task)
         self.remove_button.clicked.connect(self._remove_task)
         self.save_button.clicked.connect(self._save)
@@ -192,7 +189,7 @@ class TaskOrchestrationTab(CustomTab):
         added = {class_name for class_name, _, _ in self._rows()}
         remaining = [task for task in self._available_tasks() if task.__class__.__name__ not in added]
         if not remaining:
-            MessageBox('任务编排', '所有内置任务都已添加。', self.window()).exec()
+            show_toast(self.window(), '所有内置任务都已添加。', title='任务编排')
             return
         dialog = _AddTaskDialog(remaining, self.window())
         if not dialog.exec():
@@ -210,4 +207,4 @@ class TaskOrchestrationTab(CustomTab):
         PLAN_PATH.parent.mkdir(parents=True, exist_ok=True)
         PLAN_PATH.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8')
         self.loaded_plan = plan
-        MessageBox('任务编排', '已保存。点击“Task Orchestration”任务即可执行。', self.window()).exec()
+        show_toast(self.window(), '已保存。点击“Task Orchestration”任务即可执行。', title='任务编排')

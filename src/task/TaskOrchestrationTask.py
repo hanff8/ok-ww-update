@@ -1,10 +1,9 @@
 import json
 from pathlib import Path
 
-from qfluentwidgets import FluentIcon
-
 from src.task.BaseWWTask import BaseWWTask
 from src.task.WWOneTimeTask import WWOneTimeTask
+from src.task.task_icons import task_icon
 
 
 PLAN_PATH = Path('configs') / 'task_orchestration.json'
@@ -17,9 +16,9 @@ class TaskOrchestrationTask(WWOneTimeTask, BaseWWTask):
         super().__init__(*args, **kwargs)
         self.name = 'Task Orchestration'
         self.description = 'Run selected tasks in a custom order and repeat each task.'
-        self.group_name = 'Daily'
-        self.group_icon = FluentIcon.CALENDAR
-        self.icon = FluentIcon.MENU
+        self.group_name = 'Daily Activities'
+        self.group_icon = task_icon('category-daily')
+        self.icon = 'tasks'
         self.support_schedule_task = True
 
     def run(self):

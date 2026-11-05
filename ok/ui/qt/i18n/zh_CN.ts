@@ -263,6 +263,10 @@
             <source>Reloaded {count} tasks</source>
             <translation>已重新加载 {count} 个任务</translation>
         </message>
+        <message>
+            <source>The app is controlled by {owner}</source>
+            <translation>应用正由 {owner} 控制</translation>
+        </message>
     </context>
     <context>
         <name>GlobalConfigCard</name>
@@ -479,6 +483,58 @@
             <source>Run Code</source>
             <translation>运行代码</translation>
         </message>
+        <message>
+            <source>Import failed: {error}</source>
+            <translation>导入失败：{error}</translation>
+        </message>
+        <message>
+            <source>Develop</source>
+            <translation>开发</translation>
+        </message>
+        <message>
+            <source>Diagnosis</source>
+            <translation>诊断</translation>
+        </message>
+        <message>
+            <source>Disconnect</source>
+            <translation>断开连接</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>游戏</translation>
+        </message>
+        <message>
+            <source>Log</source>
+            <translation>日志</translation>
+        </message>
+        <message>
+            <source>Remote Control</source>
+            <translation>远程控制</translation>
+        </message>
+        <message>
+            <source>Run</source>
+            <translation>运行</translation>
+        </message>
+        <message>
+            <source>Success</source>
+            <translation>成功</translation>
+        </message>
+        <message>
+            <source>{owner} is controlling the app. Other tasks are stopped.</source>
+            <translation>{owner} 正在控制本应用，其他任务已停止。</translation>
+        </message>
+        <message>
+            <source>Cancel</source>
+            <translation>取消</translation>
+        </message>
+        <message>
+            <source>New version available</source>
+            <translation>有新版本可用</translation>
+        </message>
+        <message>
+            <source>Version {version} is available.</source>
+            <translation>版本 {version} 已发布。</translation>
+        </message>
     </context>
     <context>
         <name>MessageWindow</name>
@@ -532,6 +588,10 @@
         <message>
             <source>Search options...</source>
             <translation>搜索选项...</translation>
+        </message>
+        <message>
+            <source>Edit List</source>
+            <translation>编辑列表</translation>
         </message>
     </context>
     <context>
@@ -717,6 +777,26 @@
             <source>Configuration takes effect after restart</source>
             <translation>配置在重启后生效</translation>
         </message>
+        <message>
+            <source>Window Material</source>
+            <translation>窗口材质</translation>
+        </message>
+        <message>
+            <source>Mica tints the window with your wallpaper, Acrylic blurs what is behind it</source>
+            <translation>云母以桌面壁纸为窗口着色，亚克力会模糊窗口后方的内容</translation>
+        </message>
+        <message>
+            <source>Mica</source>
+            <translation>云母</translation>
+        </message>
+        <message>
+            <source>Acrylic</source>
+            <translation>亚克力</translation>
+        </message>
+        <message>
+            <source>None</source>
+            <translation>无</translation>
+        </message>
     </context>
     <context>
         <name>StartButton</name>
@@ -727,6 +807,14 @@
         <message>
             <source>Pause All</source>
             <translation>暂停全部</translation>
+        </message>
+        <message>
+            <source>Error</source>
+            <translation>错误</translation>
+        </message>
+        <message>
+            <source>No Task to Run, Please Enable Task First!</source>
+            <translation>没有可运行的任务，请先启用任务！</translation>
         </message>
     </context>
     <context>
@@ -975,6 +1063,14 @@
         <message>
             <source>View Log</source>
             <translation>查看日志</translation>
+        </message>
+        <message>
+            <source>Please Start First</source>
+            <translation>请先启动</translation>
+        </message>
+        <message>
+            <source>Browser</source>
+            <translation>浏览器</translation>
         </message>
     </context>
     <context>
@@ -1798,6 +1894,86 @@
             <source>Allow local coding agents to control this app and run Python code</source>
             <translation>允许本地编程代理控制此应用并运行 Python 代码</translation>
         </message>
+        <message>
+            <source>PC version requires admin privileges, Please restart this app with admin privileges!</source>
+            <translation>PC版需要管理员权限，请以管理员权限重启此应用！</translation>
+        </message>
+        <message>
+            <source>No game selected!</source>
+            <translation>未选择游戏窗口</translation>
+        </message>
+        <message>
+            <source>Capture failed, please check game window</source>
+            <translation>截图失败,请检查游戏窗口</translation>
+        </message>
+        <message>
+            <source>Game path does not exist, Please open game manually!</source>
+            <translation>无法启动游戏, 请手动打开游戏</translation>
+        </message>
+        <message>
+            <source>Start game timeout!</source>
+            <translation>启动超时!</translation>
+        </message>
+        <message>
+            <source>Window is minimized or out of screen, and don't use full-screen exclusive mode!</source>
+            <translation>窗口被最小化或在屏幕外, 不要使用独占全屏模式!</translation>
+        </message>
+        <message>
+            <source>Start game failed, please start game first</source>
+            <translation>启动游戏失败, 请先手动启动游戏!</translation>
+        </message>
+        <message>
+            <source>{} is not connected, please select the game window.</source>
+            <translation>{}未连接，请选择正确的游戏窗口。</translation>
+        </message>
+        <message>
+            <source>Selected capture method is not supported by the game or your system!</source>
+            <translation>当前游戏或模拟器不支持选择的截图方式!</translation>
+        </message>
+        <message>
+            <source>Image resource load failed, please try install again.(Don't put the app in Downloads folder)</source>
+            <translation>模板图片加载失败,请重新安装.(不要放在下载目录等可能会被自动删除图片的目录.)</translation>
+        </message>
+        <message>
+            <source>Emulator is not connected, start the emulator first!</source>
+            <translation>模拟器未连接, 请先启动!</translation>
+        </message>
+        <message>
+            <source>Can't start game, make sure the game is installed</source>
+            <translation>无法启动游戏, 请确认游戏已安装!</translation>
+        </message>
+        <message>
+            <source>NPU inferring Error, you might need to update the Intel NPU driver!</source>
+            <translation>NPU推理错误，您可能需要更新Intel NPU驱动！</translation>
+        </message>
+        <message>
+            <source>Export failed</source>
+            <translation>导出失败</translation>
+        </message>
+        <message>
+            <source>Cannot start: the app is controlled by {owner}</source>
+            <translation>无法启动：应用正由 {owner} 控制</translation>
+        </message>
+        <message>
+            <source>Cannot start {name}: the app is controlled by {owner}</source>
+            <translation>无法启动 {name}：应用正由 {owner} 控制</translation>
+        </message>
+        <message>
+            <source>Start failed: {error}</source>
+            <translation>启动失败：{error}</translation>
+        </message>
+        <message>
+            <source>Windows Graphics Capture is busy</source>
+            <translation>Windows 图形捕获正忙</translation>
+        </message>
+        <message>
+            <source>Windows Graphics Capture is not supported on this system.</source>
+            <translation>此系统不支持 Windows 图形捕获。</translation>
+        </message>
+        <message>
+            <source>Paused because browser exited</source>
+            <translation>浏览器已退出，任务已暂停</translation>
+        </message>
     </context>
     <context>
         <name>ScheduleTaskTable</name>
@@ -1963,6 +2139,26 @@
         <message>
             <source>Cancel</source>
             <translation>取消</translation>
+        </message>
+        <message>
+            <source>Modify</source>
+            <translation>修改</translation>
+        </message>
+        <message>
+            <source>Modify Schedule Task</source>
+            <translation>修改计划任务</translation>
+        </message>
+        <message>
+            <source>Task Index (-t)</source>
+            <translation>任务序号 (-t)</translation>
+        </message>
+        <message>
+            <source>Task Name</source>
+            <translation>任务名称</translation>
+        </message>
+        <message>
+            <source>Windows runs the app with this task at the chosen time, even when it is closed.</source>
+            <translation>Windows 会在选定时间启动本应用并运行此任务，即使应用已关闭。</translation>
         </message>
     </context>
     <context>
@@ -2158,6 +2354,26 @@
             <source>Failed to create task</source>
             <translation>创建任务失败</translation>
         </message>
+        <message>
+            <source>Current App</source>
+            <translation>当前应用</translation>
+        </message>
+        <message>
+            <source>No scheduled tasks</source>
+            <translation>没有计划任务</translation>
+        </message>
+        <message>
+            <source>Run a task every day, week or month without opening the app.</source>
+            <translation>无需打开应用，即可每天、每周或每月运行任务。</translation>
+        </message>
+        <message>
+            <source>Task Schedule</source>
+            <translation>计划任务</translation>
+        </message>
+        <message>
+            <source>Windows Task Scheduler starts the app and runs these tasks, even when the app is closed.</source>
+            <translation>Windows 任务计划程序会启动本应用并运行这些任务，即使应用已关闭。</translation>
+        </message>
     </context>
     <context>
         <name>MarkUpWindow</name>
@@ -2180,6 +2396,26 @@
         <message>
             <source>Right click to copy color</source>
             <translation>右键点击复制颜色</translation>
+        </message>
+        <message>
+            <source>Features</source>
+            <translation>特征</translation>
+        </message>
+        <message>
+            <source>Next image (→)</source>
+            <translation>下一张 (→)</translation>
+        </message>
+        <message>
+            <source>No features yet. Press R and click two corners to draw one.</source>
+            <translation>还没有特征。按 R 并点击两个角来绘制。</translation>
+        </message>
+        <message>
+            <source>Previous image (←)</source>
+            <translation>上一张 (←)</translation>
+        </message>
+        <message>
+            <source>Scroll to zoom  ·  Drag empty space to pan  ·  Drag a box to move it, its edges to resize  ·  Right click to copy the color  ·  Changes save automatically</source>
+            <translation>滚轮缩放  ·  拖动空白处平移  ·  拖动框可移动，拖动边缘可调整大小  ·  右键复制颜色  ·  修改会自动保存</translation>
         </message>
     </context>
     <context>
@@ -2219,6 +2455,10 @@
         <message>
             <source>Already exists in '{}'</source>
             <translation>已存在于 '{}'</translation>
+        </message>
+        <message>
+            <source>Name the feature tasks will look for.</source>
+            <translation>为任务要查找的特征命名。</translation>
         </message>
     </context>
     <context>
@@ -2803,6 +3043,58 @@
             <source>Guide</source>
             <translation>教程</translation>
         </message>
+        <message>
+            <source>Error deleting task: {error}</source>
+            <translation>删除任务时出错：{error}</translation>
+        </message>
+        <message>
+            <source>Error creating task: {error}</source>
+            <translation>创建任务时出错：{error}</translation>
+        </message>
+        <message>
+            <source>Error copying task: {error}</source>
+            <translation>复制任务时出错：{error}</translation>
+        </message>
+        <message>
+            <source>Class Name (English only)</source>
+            <translation>类名（仅限英文）</translation>
+        </message>
+        <message>
+            <source>Click a call to insert it at the cursor.</source>
+            <translation>点击调用即可插入到光标处。</translation>
+        </message>
+        <message>
+            <source>Confirm</source>
+            <translation>确认</translation>
+        </message>
+        <message>
+            <source>Create a task from scratch or copy an existing one to start.</source>
+            <translation>新建一个任务，或复制已有任务开始。</translation>
+        </message>
+        <message>
+            <source>Description (Optional)</source>
+            <translation>描述（可选）</translation>
+        </message>
+        <message>
+            <source>Don't Save</source>
+            <translation>不保存</translation>
+        </message>
+        <message>
+            <source>No scripts yet</source>
+            <translation>还没有脚本</translation>
+        </message>
+        <message>
+            <source>Select task to copy...</source>
+            <translation>选择要复制的任务...</translation>
+        </message>
+        <message>
+            <source>Task Name</source>
+            <translation>任务名称</translation>
+        </message>
+        <message>
+            <source>Templates</source>
+            <translation>模板</translation>
+        </message>
     </context>
     <context>
         <name>CreateTaskDialog</name>
@@ -2964,6 +3256,26 @@
             <source>Compress (obsolete)</source>
             <translation>压缩（已废弃）</translation>
         </message>
+        <message>
+            <source>Screenshot failed: {e}</source>
+            <translation>截图失败：{e}</translation>
+        </message>
+        <message>
+            <source>Save failed: {e}</source>
+            <translation>保存失败：{e}</translation>
+        </message>
+        <message>
+            <source>Delete failed: {e}</source>
+            <translation>删除失败：{e}</translation>
+        </message>
+        <message>
+            <source>Could not write screenshot to {path}</source>
+            <translation>无法将截图写入 {path}</translation>
+        </message>
+        <message>
+            <source>Take a screenshot of the game, then mark up the features tasks should find.</source>
+            <translation>先给游戏截图，再标注任务要查找的特征。</translation>
+        </message>
     </context>
     <context>
         <name>TemplateInputDialog</name>
@@ -2974,6 +3286,10 @@
         <message>
             <source>Cancel</source>
             <translation>取消</translation>
+        </message>
+        <message>
+            <source>Parameter '{param_name}' is required!</source>
+            <translation>参数“{param_name}”为必填项！</translation>
         </message>
     </context>
     <context>
@@ -3001,6 +3317,14 @@
         <message>
             <source>BrowserInteraction</source>
             <translation>BrowserInteraction - 后台</translation>
+        </message>
+        <message>
+            <source>Default Interaction</source>
+            <translation>默认交互</translation>
+        </message>
+        <message>
+            <source>WindowsInteraction</source>
+            <translation>Windows 交互</translation>
         </message>
     </context>
     <context>
@@ -3035,6 +3359,22 @@
         <message>
             <source>Confirm Delete</source>
             <translation>确认删除</translation>
+        </message>
+        <message>
+            <source>Copy annotation</source>
+            <translation>复制标注</translation>
+        </message>
+        <message>
+            <source>Copy color</source>
+            <translation>复制颜色</translation>
+        </message>
+        <message>
+            <source>Delete</source>
+            <translation>删除</translation>
+        </message>
+        <message>
+            <source>Modify</source>
+            <translation>修改</translation>
         </message>
     </context>
     <context>
@@ -3274,6 +3614,22 @@
             <source>Backup cleanup pending. Restart to retry.</source>
             <translation>备份清理未完成，请重启后重试。</translation>
         </message>
+        <message>
+            <source>The release archive belongs to a different plugin</source>
+            <translation>此发布压缩包属于其他插件</translation>
+        </message>
+        <message>
+            <source>The release archive is not a newer plugin version</source>
+            <translation>此发布压缩包中的插件版本不是更新版本</translation>
+        </message>
+        <message>
+            <source>Add a plugin from a ZIP file or a GitHub release.</source>
+            <translation>从 ZIP 文件或 GitHub 发行版添加插件。</translation>
+        </message>
+        <message>
+            <source>From GitHub: {}</source>
+            <translation>来自 GitHub：{}</translation>
+        </message>
     </context>
     <context>
         <name>LabelAndMcpServer</name>
@@ -3296,6 +3652,220 @@
         <message>
             <source>No</source>
             <translation>否</translation>
+        </message>
+    </context>
+    <context>
+        <name>JobControls</name>
+        <message>
+            <source>The app is controlled by {owner}</source>
+            <translation>应用正由 {owner} 控制</translation>
+        </message>
+        <message>
+            <source>Failed after {seconds}s</source>
+            <translation>{seconds} 秒后失败</translation>
+        </message>
+    </context>
+    <context>
+        <name>ConnectionPopover</name>
+        <message>
+            <source>Game window</source>
+            <translation>游戏窗口</translation>
+        </message>
+        <message>
+            <source>Open folder</source>
+            <translation>打开文件夹</translation>
+        </message>
+    </context>
+    <context>
+        <name>DiagnosisPage</name>
+        <message>
+            <source>Boxes</source>
+            <translation>标框</translation>
+        </message>
+        <message>
+            <source>Captures, OCR results and task screenshots appear here.</source>
+            <translation>截图、OCR 结果和任务截图会显示在这里。</translation>
+        </message>
+        <message>
+            <source>Developer</source>
+            <translation>开发者</translation>
+        </message>
+        <message>
+            <source>Dump Threads</source>
+            <translation>导出线程</translation>
+        </message>
+        <message>
+            <source>No screenshot yet. Capture one to see it here.</source>
+            <translation>还没有截图。截一张即可在这里查看。</translation>
+        </message>
+        <message>
+            <source>No text found</source>
+            <translation>未识别到文字</translation>
+        </message>
+        <message>
+            <source>Open</source>
+            <translation>打开</translation>
+        </message>
+        <message>
+            <source>Open image</source>
+            <translation>打开图片</translation>
+        </message>
+        <message>
+            <source>Open screenshot folder</source>
+            <translation>打开截图文件夹</translation>
+        </message>
+        <message>
+            <source>Original</source>
+            <translation>原图</translation>
+        </message>
+        <message>
+            <source>Recent</source>
+            <translation>最近</translation>
+        </message>
+        <message>
+            <source>Run OCR on the current frame and save a screenshot with the text boxes</source>
+            <translation>对当前画面进行 OCR，并保存带文字框的截图</translation>
+        </message>
+        <message>
+            <source>Saved to {path}</source>
+            <translation>已保存到 {path}</translation>
+        </message>
+        <message>
+            <source>Screenshots</source>
+            <translation>截图</translation>
+        </message>
+        <message>
+            <source>Show in folder</source>
+            <translation>在文件夹中显示</translation>
+        </message>
+        <message>
+            <source>Write every thread's stack to logs/thread_dumps.txt</source>
+            <translation>将所有线程的调用栈写入 logs/thread_dumps.txt</translation>
+        </message>
+    </context>
+    <context>
+        <name>Dialog</name>
+        <message>
+            <source>Cancel</source>
+            <translation>取消</translation>
+        </message>
+        <message>
+            <source>OK</source>
+            <translation>确定</translation>
+        </message>
+    </context>
+    <context>
+        <name>LogPage</name>
+        <message>
+            <source>Jump to latest</source>
+            <translation>跳到最新</translation>
+        </message>
+        <message>
+            <source>lines</source>
+            <translation>行</translation>
+        </message>
+    </context>
+    <context>
+        <name>NavigationView</name>
+        <message>
+            <source>Collapse</source>
+            <translation>收起</translation>
+        </message>
+        <message>
+            <source>Expand</source>
+            <translation>展开</translation>
+        </message>
+    </context>
+    <context>
+        <name>RunBar</name>
+        <message>
+            <source>+{count} queued</source>
+            <translation>+{count} 个排队中</translation>
+        </message>
+        <message>
+            <source>Cancel</source>
+            <translation>取消</translation>
+        </message>
+        <message>
+            <source>Cancel this task</source>
+            <translation>取消此任务</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>游戏</translation>
+        </message>
+        <message>
+            <source>Launches the game if needed, then runs triggers and queued tasks</source>
+            <translation>必要时启动游戏，然后运行触发任务和排队任务</translation>
+        </message>
+        <message>
+            <source>Launching {name}</source>
+            <translation>正在启动{name}</translation>
+        </message>
+        <message>
+            <source>No game selected</source>
+            <translation>未选择游戏</translation>
+        </message>
+        <message>
+            <source>Pause {name}</source>
+            <translation>暂停{name}</translation>
+        </message>
+        <message>
+            <source>Start {name}</source>
+            <translation>启动{name}</translation>
+        </message>
+    </context>
+    <context>
+        <name>TaskDetail</name>
+        <message>
+            <source>This task has no settings.</source>
+            <translation>此任务没有设置。</translation>
+        </message>
+    </context>
+    <context>
+        <name>TasksPage</name>
+        <message>
+            <source>All</source>
+            <translation>全部</translation>
+        </message>
+        <message>
+            <source>More actions</source>
+            <translation>更多操作</translation>
+        </message>
+        <message>
+            <source>On-demand</source>
+            <translation>手动</translation>
+        </message>
+        <message>
+            <source>Paused</source>
+            <translation>已暂停</translation>
+        </message>
+        <message>
+            <source>Queued</source>
+            <translation>排队中</translation>
+        </message>
+        <message>
+            <source>Run task</source>
+            <translation>运行任务</translation>
+        </message>
+        <message>
+            <source>Select a task to see its settings.</source>
+            <translation>选择任务以查看其设置。</translation>
+        </message>
+        <message>
+            <source>Settings</source>
+            <translation>设置</translation>
+        </message>
+        <message>
+            <source>Triggers</source>
+            <translation>触发任务</translation>
+        </message>
+    </context>
+    <context>
+        <name>Toast</name>
+        <message>
+            <source>Close</source>
+            <translation>关闭</translation>
         </message>
     </context>
 </TS>

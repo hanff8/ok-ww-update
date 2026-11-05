@@ -272,6 +272,10 @@
             <source>Reloaded {count} tasks</source>
             <translation>작업 {count}개를 다시 불러왔습니다</translation>
         </message>
+        <message>
+            <source>The app is controlled by {owner}</source>
+            <translation>{owner}이(가) 앱을 제어하고 있습니다</translation>
+        </message>
     </context>
     <context>
         <name>GlobalConfigCard</name>
@@ -490,6 +494,58 @@
             <source>Run Code</source>
             <translation>코드 실행</translation>
         </message>
+        <message>
+            <source>Import failed: {error}</source>
+            <translation>가져오기 실패: {error}</translation>
+        </message>
+        <message>
+            <source>Develop</source>
+            <translation>개발</translation>
+        </message>
+        <message>
+            <source>Diagnosis</source>
+            <translation>진단</translation>
+        </message>
+        <message>
+            <source>Disconnect</source>
+            <translation>연결 해제</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>게임</translation>
+        </message>
+        <message>
+            <source>Log</source>
+            <translation>로그</translation>
+        </message>
+        <message>
+            <source>Remote Control</source>
+            <translation>원격 제어</translation>
+        </message>
+        <message>
+            <source>Run</source>
+            <translation>실행</translation>
+        </message>
+        <message>
+            <source>Success</source>
+            <translation>성공</translation>
+        </message>
+        <message>
+            <source>{owner} is controlling the app. Other tasks are stopped.</source>
+            <translation>{owner}이(가) 앱을 제어하고 있습니다. 다른 작업은 중지되었습니다.</translation>
+        </message>
+        <message>
+            <source>Cancel</source>
+            <translation>취소</translation>
+        </message>
+        <message>
+            <source>New version available</source>
+            <translation>새 버전을 사용할 수 있습니다</translation>
+        </message>
+        <message>
+            <source>Version {version} is available.</source>
+            <translation>버전 {version}을(를) 사용할 수 있습니다.</translation>
+        </message>
     </context>
     <context>
         <name>MessageWindow</name>
@@ -543,6 +599,10 @@
         <message>
             <source>Search options...</source>
             <translation>옵션 검색...</translation>
+        </message>
+        <message>
+            <source>Edit List</source>
+            <translation>목록 편집</translation>
         </message>
     </context>
     <context>
@@ -716,6 +776,26 @@
             <source>Configuration takes effect after restart</source>
             <translation>다시 시작하면 구성이 적용됩니다</translation>
         </message>
+        <message>
+            <source>Window Material</source>
+            <translation>창 재질</translation>
+        </message>
+        <message>
+            <source>Mica tints the window with your wallpaper, Acrylic blurs what is behind it</source>
+            <translation>Mica는 바탕 화면 배경으로 창에 색을 입히고, 아크릴은 창 뒤를 흐리게 보여 줍니다</translation>
+        </message>
+        <message>
+            <source>Mica</source>
+            <translation>Mica</translation>
+        </message>
+        <message>
+            <source>Acrylic</source>
+            <translation>아크릴</translation>
+        </message>
+        <message>
+            <source>None</source>
+            <translation>없음</translation>
+        </message>
     </context>
     <context>
         <name>StartButton</name>
@@ -726,6 +806,14 @@
         <message>
             <source>Pause All</source>
             <translation>모두 일시 중지</translation>
+        </message>
+        <message>
+            <source>Error</source>
+            <translation>오류</translation>
+        </message>
+        <message>
+            <source>No Task to Run, Please Enable Task First!</source>
+            <translation>실행할 작업이 없습니다. 먼저 작업을 활성화해 주세요!</translation>
         </message>
     </context>
     <context>
@@ -978,6 +1066,14 @@
         <message>
             <source>View Log</source>
             <translation>로그 보기</translation>
+        </message>
+        <message>
+            <source>Please Start First</source>
+            <translation>먼저 시작해 주세요</translation>
+        </message>
+        <message>
+            <source>Browser</source>
+            <translation>브라우저</translation>
         </message>
     </context>
     <context>
@@ -1801,6 +1897,86 @@
             <source>Allow local coding agents to control this app and run Python code</source>
             <translation>로컬 코딩 에이전트가 이 앱을 제어하고 Python 코드를 실행하도록 허용</translation>
         </message>
+        <message>
+            <source>PC version requires admin privileges, Please restart this app with admin privileges!</source>
+            <translation>PC 버전은 관리자 권한이 필요합니다. 관리자 권한으로 이 앱을 다시 시작하세요!</translation>
+        </message>
+        <message>
+            <source>No game selected!</source>
+            <translation>게임을 선택하지 않았습니다!</translation>
+        </message>
+        <message>
+            <source>Capture failed, please check game window</source>
+            <translation>캡처 실패, 게임 창을 확인하세요</translation>
+        </message>
+        <message>
+            <source>Game path does not exist, Please open game manually!</source>
+            <translation>게임 경로가 없습니다. 게임을 수동으로 시작하세요!</translation>
+        </message>
+        <message>
+            <source>Start game timeout!</source>
+            <translation>시작 시간 초과!</translation>
+        </message>
+        <message>
+            <source>Window is minimized or out of screen, and don't use full-screen exclusive mode!</source>
+            <translation>창이 최소화되었거나 화면 밖에 있습니다. 전체 화면 전용 모드를 사용하지 마세요!</translation>
+        </message>
+        <message>
+            <source>Start game failed, please start game first</source>
+            <translation>게임 시작 실패, 먼저 게임을 수동으로 시작하세요!</translation>
+        </message>
+        <message>
+            <source>{} is not connected, please select the game window.</source>
+            <translation>{}게임 창이 연결되지 않았습니다. 게임 창과 캡처 방법을 선택하세요.</translation>
+        </message>
+        <message>
+            <source>Selected capture method is not supported by the game or your system!</source>
+            <translation>선택한 캡처 방법이 게임 또는 시스템에서 지원되지 않습니다!</translation>
+        </message>
+        <message>
+            <source>Image resource load failed, please try install again.(Don't put the app in Downloads folder)</source>
+            <translation>이미지 리소스 로드 실패, 다시 설치해 보세요. (앱을 다운로드 폴더에 두지 마세요)</translation>
+        </message>
+        <message>
+            <source>Emulator is not connected, start the emulator first!</source>
+            <translation>에뮬레이터가 연결되지 않았습니다. 먼저 에뮬레이터를 시작하세요!</translation>
+        </message>
+        <message>
+            <source>Can't start game, make sure the game is installed</source>
+            <translation>게임을 시작할 수 없습니다. 게임이 설치되었는지 확인하세요</translation>
+        </message>
+        <message>
+            <source>NPU inferring Error, you might need to update the Intel NPU driver!</source>
+            <translation>NPU 추론 오류, Intel NPU 드라이버를 업데이트해야 할 수 있습니다!</translation>
+        </message>
+        <message>
+            <source>Export failed</source>
+            <translation>내보내기 실패</translation>
+        </message>
+        <message>
+            <source>Cannot start: the app is controlled by {owner}</source>
+            <translation>시작할 수 없습니다: {owner}이(가) 앱을 제어하고 있습니다</translation>
+        </message>
+        <message>
+            <source>Cannot start {name}: the app is controlled by {owner}</source>
+            <translation>{name}을(를) 시작할 수 없습니다: {owner}이(가) 앱을 제어하고 있습니다</translation>
+        </message>
+        <message>
+            <source>Start failed: {error}</source>
+            <translation>시작 실패: {error}</translation>
+        </message>
+        <message>
+            <source>Windows Graphics Capture is busy</source>
+            <translation>Windows Graphics Capture가 사용 중입니다</translation>
+        </message>
+        <message>
+            <source>Windows Graphics Capture is not supported on this system.</source>
+            <translation>이 시스템은 Windows Graphics Capture를 지원하지 않습니다.</translation>
+        </message>
+        <message>
+            <source>Paused because browser exited</source>
+            <translation>브라우저가 종료되어 일시 중지되었습니다</translation>
+        </message>
     </context>
     <context>
         <name>ScheduleTaskTable</name>
@@ -1966,6 +2142,26 @@
         <message>
             <source>Cancel</source>
             <translation>취소</translation>
+        </message>
+        <message>
+            <source>Modify</source>
+            <translation>수정</translation>
+        </message>
+        <message>
+            <source>Modify Schedule Task</source>
+            <translation>예약 작업 수정</translation>
+        </message>
+        <message>
+            <source>Task Index (-t)</source>
+            <translation>작업 번호 (-t)</translation>
+        </message>
+        <message>
+            <source>Task Name</source>
+            <translation>작업 이름</translation>
+        </message>
+        <message>
+            <source>Windows runs the app with this task at the chosen time, even when it is closed.</source>
+            <translation>앱이 닫혀 있어도 지정한 시간에 Windows가 앱을 실행해 이 작업을 수행합니다.</translation>
         </message>
     </context>
     <context>
@@ -2161,6 +2357,26 @@
             <source>Failed to create task</source>
             <translation>작업 생성 실패</translation>
         </message>
+        <message>
+            <source>Current App</source>
+            <translation>현재 앱</translation>
+        </message>
+        <message>
+            <source>No scheduled tasks</source>
+            <translation>예약된 작업 없음</translation>
+        </message>
+        <message>
+            <source>Run a task every day, week or month without opening the app.</source>
+            <translation>앱을 열지 않아도 매일, 매주, 매월 작업을 실행합니다.</translation>
+        </message>
+        <message>
+            <source>Task Schedule</source>
+            <translation>작업 예약</translation>
+        </message>
+        <message>
+            <source>Windows Task Scheduler starts the app and runs these tasks, even when the app is closed.</source>
+            <translation>앱이 닫혀 있어도 Windows 작업 스케줄러가 앱을 실행해 이 작업들을 수행합니다.</translation>
+        </message>
     </context>
     <context>
         <name>MarkUpWindow</name>
@@ -2183,6 +2399,26 @@
         <message>
             <source>Right click to copy color</source>
             <translation>우클릭으로 색상 복사</translation>
+        </message>
+        <message>
+            <source>Features</source>
+            <translation>특징</translation>
+        </message>
+        <message>
+            <source>Next image (→)</source>
+            <translation>다음 이미지 (→)</translation>
+        </message>
+        <message>
+            <source>No features yet. Press R and click two corners to draw one.</source>
+            <translation>아직 특징이 없습니다. R을 누르고 두 모서리를 클릭해 그리세요.</translation>
+        </message>
+        <message>
+            <source>Previous image (←)</source>
+            <translation>이전 이미지 (←)</translation>
+        </message>
+        <message>
+            <source>Scroll to zoom  ·  Drag empty space to pan  ·  Drag a box to move it, its edges to resize  ·  Right click to copy the color  ·  Changes save automatically</source>
+            <translation>스크롤로 확대/축소  ·  빈 곳을 끌어 이동  ·  박스를 끌어 이동, 가장자리를 끌어 크기 조절  ·  우클릭으로 색상 복사  ·  변경 사항은 자동 저장됩니다</translation>
         </message>
     </context>
     <context>
@@ -2222,6 +2458,10 @@
         <message>
             <source>Already exists in '{}'</source>
             <translation>'{}' 에 이미 존재합니다</translation>
+        </message>
+        <message>
+            <source>Name the feature tasks will look for.</source>
+            <translation>작업이 찾을 특징의 이름을 지정하세요.</translation>
         </message>
     </context>
     <context>
@@ -2806,6 +3046,58 @@
             <source>Guide</source>
             <translation>가이드</translation>
         </message>
+        <message>
+            <source>Error deleting task: {error}</source>
+            <translation>작업 삭제 중 오류 발생: {error}</translation>
+        </message>
+        <message>
+            <source>Error creating task: {error}</source>
+            <translation>작업 생성 중 오류 발생: {error}</translation>
+        </message>
+        <message>
+            <source>Error copying task: {error}</source>
+            <translation>작업 복사 중 오류 발생: {error}</translation>
+        </message>
+        <message>
+            <source>Class Name (English only)</source>
+            <translation>클래스 이름(영문만)</translation>
+        </message>
+        <message>
+            <source>Click a call to insert it at the cursor.</source>
+            <translation>호출을 클릭하면 커서 위치에 삽입됩니다.</translation>
+        </message>
+        <message>
+            <source>Confirm</source>
+            <translation>확인</translation>
+        </message>
+        <message>
+            <source>Create a task from scratch or copy an existing one to start.</source>
+            <translation>작업을 새로 만들거나 기존 작업을 복사해 시작하세요.</translation>
+        </message>
+        <message>
+            <source>Description (Optional)</source>
+            <translation>설명(선택)</translation>
+        </message>
+        <message>
+            <source>Don't Save</source>
+            <translation>저장 안 함</translation>
+        </message>
+        <message>
+            <source>No scripts yet</source>
+            <translation>아직 스크립트가 없습니다</translation>
+        </message>
+        <message>
+            <source>Select task to copy...</source>
+            <translation>복사할 작업 선택...</translation>
+        </message>
+        <message>
+            <source>Task Name</source>
+            <translation>작업 이름</translation>
+        </message>
+        <message>
+            <source>Templates</source>
+            <translation>템플릿</translation>
+        </message>
     </context>
     <context>
         <name>CreateTaskDialog</name>
@@ -2967,6 +3259,26 @@
             <source>Compress (obsolete)</source>
             <translation>압축(사용 중단)</translation>
         </message>
+        <message>
+            <source>Screenshot failed: {e}</source>
+            <translation>스크린샷 촬영 실패: {e}</translation>
+        </message>
+        <message>
+            <source>Save failed: {e}</source>
+            <translation>저장 실패: {e}</translation>
+        </message>
+        <message>
+            <source>Delete failed: {e}</source>
+            <translation>삭제 실패: {e}</translation>
+        </message>
+        <message>
+            <source>Could not write screenshot to {path}</source>
+            <translation>{path}에 스크린샷을 저장할 수 없습니다</translation>
+        </message>
+        <message>
+            <source>Take a screenshot of the game, then mark up the features tasks should find.</source>
+            <translation>게임 스크린샷을 찍은 뒤 작업이 찾을 특징을 표시하세요.</translation>
+        </message>
     </context>
     <context>
         <name>TemplateInputDialog</name>
@@ -2977,6 +3289,10 @@
         <message>
             <source>Cancel</source>
             <translation>취소</translation>
+        </message>
+        <message>
+            <source>Parameter '{param_name}' is required!</source>
+            <translation>'{param_name}' 매개변수는 필수입니다!</translation>
         </message>
     </context>
     <context>
@@ -3004,6 +3320,14 @@
         <message>
             <source>BrowserInteraction</source>
             <translation>BrowserInteraction - 백그라운드</translation>
+        </message>
+        <message>
+            <source>Default Interaction</source>
+            <translation>기본 상호작용</translation>
+        </message>
+        <message>
+            <source>WindowsInteraction</source>
+            <translation>Windows 상호작용</translation>
         </message>
     </context>
     <context>
@@ -3038,6 +3362,22 @@
         <message>
             <source>Confirm Delete</source>
             <translation>삭제 확인</translation>
+        </message>
+        <message>
+            <source>Copy annotation</source>
+            <translation>주석 복사</translation>
+        </message>
+        <message>
+            <source>Copy color</source>
+            <translation>색상 복사</translation>
+        </message>
+        <message>
+            <source>Delete</source>
+            <translation>삭제</translation>
+        </message>
+        <message>
+            <source>Modify</source>
+            <translation>수정</translation>
         </message>
     </context>
     <context>
@@ -3277,6 +3617,22 @@
             <source>Backup cleanup pending. Restart to retry.</source>
             <translation>백업 정리가 대기 중입니다. 다시 시작하여 재시도하세요.</translation>
         </message>
+        <message>
+            <source>The release archive belongs to a different plugin</source>
+            <translation>이 릴리스 압축 파일은 다른 플러그인에 속합니다</translation>
+        </message>
+        <message>
+            <source>The release archive is not a newer plugin version</source>
+            <translation>이 릴리스 압축 파일은 더 최신 플러그인 버전이 아닙니다</translation>
+        </message>
+        <message>
+            <source>Add a plugin from a ZIP file or a GitHub release.</source>
+            <translation>ZIP 파일이나 GitHub 릴리스에서 플러그인을 추가하세요.</translation>
+        </message>
+        <message>
+            <source>From GitHub: {}</source>
+            <translation>GitHub에서: {}</translation>
+        </message>
     </context>
     <context>
         <name>LabelAndMcpServer</name>
@@ -3299,6 +3655,220 @@
         <message>
             <source>No</source>
             <translation>아니요</translation>
+        </message>
+    </context>
+    <context>
+        <name>JobControls</name>
+        <message>
+            <source>The app is controlled by {owner}</source>
+            <translation>{owner}이(가) 앱을 제어하고 있습니다</translation>
+        </message>
+        <message>
+            <source>Failed after {seconds}s</source>
+            <translation>{seconds}초 후 실패</translation>
+        </message>
+    </context>
+    <context>
+        <name>ConnectionPopover</name>
+        <message>
+            <source>Game window</source>
+            <translation>게임 창</translation>
+        </message>
+        <message>
+            <source>Open folder</source>
+            <translation>폴더 열기</translation>
+        </message>
+    </context>
+    <context>
+        <name>DiagnosisPage</name>
+        <message>
+            <source>Boxes</source>
+            <translation>박스</translation>
+        </message>
+        <message>
+            <source>Captures, OCR results and task screenshots appear here.</source>
+            <translation>캡처, OCR 결과, 작업 스크린샷이 여기에 표시됩니다.</translation>
+        </message>
+        <message>
+            <source>Developer</source>
+            <translation>개발자</translation>
+        </message>
+        <message>
+            <source>Dump Threads</source>
+            <translation>스레드 덤프</translation>
+        </message>
+        <message>
+            <source>No screenshot yet. Capture one to see it here.</source>
+            <translation>아직 스크린샷이 없습니다. 캡처하면 여기에 표시됩니다.</translation>
+        </message>
+        <message>
+            <source>No text found</source>
+            <translation>텍스트를 찾지 못했습니다</translation>
+        </message>
+        <message>
+            <source>Open</source>
+            <translation>열기</translation>
+        </message>
+        <message>
+            <source>Open image</source>
+            <translation>이미지 열기</translation>
+        </message>
+        <message>
+            <source>Open screenshot folder</source>
+            <translation>스크린샷 폴더 열기</translation>
+        </message>
+        <message>
+            <source>Original</source>
+            <translation>원본</translation>
+        </message>
+        <message>
+            <source>Recent</source>
+            <translation>최근</translation>
+        </message>
+        <message>
+            <source>Run OCR on the current frame and save a screenshot with the text boxes</source>
+            <translation>현재 화면에서 OCR을 실행하고 텍스트 박스가 표시된 스크린샷을 저장합니다</translation>
+        </message>
+        <message>
+            <source>Saved to {path}</source>
+            <translation>{path}에 저장했습니다</translation>
+        </message>
+        <message>
+            <source>Screenshots</source>
+            <translation>스크린샷</translation>
+        </message>
+        <message>
+            <source>Show in folder</source>
+            <translation>폴더에서 보기</translation>
+        </message>
+        <message>
+            <source>Write every thread's stack to logs/thread_dumps.txt</source>
+            <translation>모든 스레드의 스택을 logs/thread_dumps.txt에 기록합니다</translation>
+        </message>
+    </context>
+    <context>
+        <name>Dialog</name>
+        <message>
+            <source>Cancel</source>
+            <translation>취소</translation>
+        </message>
+        <message>
+            <source>OK</source>
+            <translation>확인</translation>
+        </message>
+    </context>
+    <context>
+        <name>LogPage</name>
+        <message>
+            <source>Jump to latest</source>
+            <translation>최신으로 이동</translation>
+        </message>
+        <message>
+            <source>lines</source>
+            <translation>줄</translation>
+        </message>
+    </context>
+    <context>
+        <name>NavigationView</name>
+        <message>
+            <source>Collapse</source>
+            <translation>접기</translation>
+        </message>
+        <message>
+            <source>Expand</source>
+            <translation>펼치기</translation>
+        </message>
+    </context>
+    <context>
+        <name>RunBar</name>
+        <message>
+            <source>+{count} queued</source>
+            <translation>+{count}개 대기 중</translation>
+        </message>
+        <message>
+            <source>Cancel</source>
+            <translation>취소</translation>
+        </message>
+        <message>
+            <source>Cancel this task</source>
+            <translation>이 작업 취소</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>게임</translation>
+        </message>
+        <message>
+            <source>Launches the game if needed, then runs triggers and queued tasks</source>
+            <translation>필요하면 게임을 실행한 뒤 트리거와 대기 중인 작업을 실행합니다</translation>
+        </message>
+        <message>
+            <source>Launching {name}</source>
+            <translation>{name} 실행 중</translation>
+        </message>
+        <message>
+            <source>No game selected</source>
+            <translation>선택된 게임 없음</translation>
+        </message>
+        <message>
+            <source>Pause {name}</source>
+            <translation>{name} 일시정지</translation>
+        </message>
+        <message>
+            <source>Start {name}</source>
+            <translation>{name} 시작</translation>
+        </message>
+    </context>
+    <context>
+        <name>TaskDetail</name>
+        <message>
+            <source>This task has no settings.</source>
+            <translation>이 작업에는 설정이 없습니다.</translation>
+        </message>
+    </context>
+    <context>
+        <name>TasksPage</name>
+        <message>
+            <source>All</source>
+            <translation>전체</translation>
+        </message>
+        <message>
+            <source>More actions</source>
+            <translation>추가 작업</translation>
+        </message>
+        <message>
+            <source>On-demand</source>
+            <translation>수동</translation>
+        </message>
+        <message>
+            <source>Paused</source>
+            <translation>일시정지됨</translation>
+        </message>
+        <message>
+            <source>Queued</source>
+            <translation>대기 중</translation>
+        </message>
+        <message>
+            <source>Run task</source>
+            <translation>작업 실행</translation>
+        </message>
+        <message>
+            <source>Select a task to see its settings.</source>
+            <translation>작업을 선택하면 설정이 표시됩니다.</translation>
+        </message>
+        <message>
+            <source>Settings</source>
+            <translation>설정</translation>
+        </message>
+        <message>
+            <source>Triggers</source>
+            <translation>트리거</translation>
+        </message>
+    </context>
+    <context>
+        <name>Toast</name>
+        <message>
+            <source>Close</source>
+            <translation>닫기</translation>
         </message>
     </context>
 </TS>
