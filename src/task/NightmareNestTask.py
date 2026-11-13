@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from ok import Logger
 from src.task.BaseCombatTask import BaseCombatTask, CharRevivedException
-from src.task.BaseWWTask import BaseWWTask
+from src.task.BaseWWTask import BaseWWTask, TEAM_SCREEN_FEATURES
 from src.task.WWOneTimeTask import WWOneTimeTask
 from src.task.task_icons import task_icon
 
@@ -95,9 +95,9 @@ class NightmareNestTask(WWOneTimeTask, BaseCombatTask):
             self.log_info('nearby beacon cannot be fast traveled, skip this nest')
             self._skip_unreachable_nest(nest)
             return
-        feature = self.wait_feature(['fast_travel_custom', 'gray_teleport', 'remove_custom', 'team_close'], time_out=10,
-                                    settle_time=0.5, raise_if_not_found=True)
-        is_team = feature.name == 'team_close'
+        feature = self.wait_feature(['fast_travel_custom', 'gray_teleport', 'remove_custom', *TEAM_SCREEN_FEATURES],
+                                    time_out=10, settle_time=0.5, raise_if_not_found=True)
+        is_team = feature.name in TEAM_SCREEN_FEATURES
         if is_team:
             self.click_team_challenge()
             self.wait_in_team_and_world(time_out=120)

@@ -32,6 +32,9 @@ f_white_color = {
 }
 processed_feature = False
 WIDE_MODE_UI_SCALE = 0.75
+# 编队界面的判据。team_close 是可交互按钮, 鼠标悬停时会放大变形, 匹配分数掉到 0.62;
+# team_start_challenge 在同一帧不随悬停变化, 且下一步本来就要点它。
+TEAM_SCREEN_FEATURES = ('team_start_challenge', 'team_close')
 
 
 class BaseWWTask(BaseTask):
@@ -1223,10 +1226,10 @@ class BaseWWTask(BaseTask):
             target = max(btns, key=lambda box: box.y)
         self.draw_boxes(boxes=target, color="red")
         self.click(target, after_sleep=1)
-        feature = self.wait_feature(['fast_travel_custom', 'gray_teleport', 'remove_custom', 'team_close'], time_out=10,
-                                    settle_time=0.5, raise_if_not_found=True)
+        feature = self.wait_feature(['fast_travel_custom', 'gray_teleport', 'remove_custom', *TEAM_SCREEN_FEATURES],
+                                    time_out=10, settle_time=0.5, raise_if_not_found=True)
         self._travel_feature = feature.name
-        return feature.name == 'team_close'
+        return feature.name in TEAM_SCREEN_FEATURES
 
     def is_fast_travel_unavailable(self):
         # 「附近信标无法快速到达」的红条只出现在图鉴详情页下方的按钮区，用颜色定位以免受语言和多行图标排版影响

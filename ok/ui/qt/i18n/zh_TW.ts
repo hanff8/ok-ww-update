@@ -1972,6 +1972,50 @@
             <source>Paused because browser exited</source>
             <translation>瀏覽器已結束，任務已暫停</translation>
         </message>
+        <message>
+            <source>Create Start Menu Shortcut</source>
+            <translation>建立開始功能表捷徑</translation>
+        </message>
+        <message>
+            <source>Create Desktop Shortcut</source>
+            <translation>建立桌面捷徑</translation>
+        </message>
+        <message>
+            <source>Create or update the Start Menu shortcut when the app starts</source>
+            <translation>應用程式啟動時建立或更新開始功能表捷徑</translation>
+        </message>
+        <message>
+            <source>Create or update the Desktop shortcut when the app starts</source>
+            <translation>應用程式啟動時建立或更新桌面捷徑</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>遊戲</translation>
+        </message>
+        <message>
+            <source>Tasks</source>
+            <translation>任務</translation>
+        </message>
+        <message>
+            <source>Application</source>
+            <translation>應用程式</translation>
+        </message>
+        <message>
+            <source>Shortcuts</source>
+            <translation>捷徑</translation>
+        </message>
+        <message>
+            <source>Developer</source>
+            <translation>開發者</translation>
+        </message>
+        <message>
+            <source>Other</source>
+            <translation>其他</translation>
+        </message>
+        <message>
+            <source>Created or updated shortcuts: {paths}</source>
+            <translation>已建立或更新捷徑：{paths}</translation>
+        </message>
     </context>
     <context>
         <name>ScheduleTaskTable</name>
@@ -3493,6 +3537,10 @@
         <message>
             <source>Download</source>
             <translation>下載</translation>
+        </message>
+        <message>
+            <source>Switch</source>
+            <translation>切換</translation>
         </message>
     </context>
     <context>

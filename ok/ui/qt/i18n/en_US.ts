@@ -1978,6 +1978,50 @@
             <source>Paused because browser exited</source>
             <translation>Paused because browser exited</translation>
         </message>
+        <message>
+            <source>Create Start Menu Shortcut</source>
+            <translation>Create Start Menu Shortcut</translation>
+        </message>
+        <message>
+            <source>Create Desktop Shortcut</source>
+            <translation>Create Desktop Shortcut</translation>
+        </message>
+        <message>
+            <source>Create or update the Start Menu shortcut when the app starts</source>
+            <translation>Create or update the Start Menu shortcut when the app starts</translation>
+        </message>
+        <message>
+            <source>Create or update the Desktop shortcut when the app starts</source>
+            <translation>Create or update the Desktop shortcut when the app starts</translation>
+        </message>
+        <message>
+            <source>Game</source>
+            <translation>Game</translation>
+        </message>
+        <message>
+            <source>Tasks</source>
+            <translation>Tasks</translation>
+        </message>
+        <message>
+            <source>Application</source>
+            <translation>Application</translation>
+        </message>
+        <message>
+            <source>Shortcuts</source>
+            <translation>Shortcuts</translation>
+        </message>
+        <message>
+            <source>Developer</source>
+            <translation>Developer</translation>
+        </message>
+        <message>
+            <source>Other</source>
+            <translation>Other</translation>
+        </message>
+        <message>
+            <source>Created or updated shortcuts: {paths}</source>
+            <translation>Created or updated shortcuts: {paths}</translation>
+        </message>
     </context>
     <context>
         <name>ScheduleTaskTable</name>
@@ -3499,6 +3543,10 @@
         <message>
             <source>Download</source>
             <translation>Download</translation>
+        </message>
+        <message>
+            <source>Switch</source>
+            <translation>Switch</translation>
         </message>
     </context>
     <context>
