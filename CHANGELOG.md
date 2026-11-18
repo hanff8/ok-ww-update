@@ -2,6 +2,16 @@
 
 Release history starts at v3.0.0.
 
+## v3.8.5-beta.2 (2026-11-18)
+
+- Maintenance release: updated GitHub release-note generation; no additional user-facing changes.
+
+## v3.8.4 (2026-11-18)
+
+- Restored cloud browser play at 1080p, with Edge preferred and corrected capture colors on HDR displays.
+- Improved cloud combat target and health-bar detection, including long action bars and compressed low-health bars.
+- Added recovery from cloud disconnect dialogs (errors 1020 and 4012).
+
 ## v3.8.3 (2026-11-15)
 
 - Added Pynput as a selectable input method; PostMessage remains the default.
