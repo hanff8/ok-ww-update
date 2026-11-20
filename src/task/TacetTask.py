@@ -1,5 +1,6 @@
 from ok import Logger
 from src.task.BaseCombatTask import BaseCombatTask, CharRevivedException
+from src.task.BaseWWTask import TEAM_SCREEN_FEATURES
 from src.task.WWOneTimeTask import WWOneTimeTask
 from src.task.task_icons import task_icon
 
@@ -122,9 +123,11 @@ class TacetTask(WWOneTimeTask, BaseCombatTask):
             self._back_to_world_after_skip()
             return False
         travel_feature = getattr(self, '_travel_feature', None)
-        if travel_feature is not None and travel_feature != 'team_close':
+        if travel_feature is not None and travel_feature not in TEAM_SCREEN_FEATURES:
             # 走的是书页上的「前往」而不是组队直进：它只负责把队伍送到信标旁，还得再点一次才开始挑战，
-            # 否则下面等组队界面同样等不到
+            # 否则下面等组队界面同样等不到。
+            # 组队界面的两个特征都不能点：team_start_challenge 若在这里被点掉，
+            # farm_tacet 随后的 click_team_challenge 会等不到它而超时中断整个日常。
             self.wait_click_feature(travel_feature, raise_if_not_found=False, time_out=5, click_after_delay=0.5,
                                     after_sleep=1)
             if self.is_fast_travel_unavailable():

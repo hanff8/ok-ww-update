@@ -1006,8 +1006,12 @@ class BaseWWTask(BaseTask):
             # self.screenshot('monthly_card2')
             self.click_relative(0.50, 0.89)
             self.sleep(2)
-            self.wait_until(self.in_team_and_world, time_out=10,
-                            post_action=lambda: self.click_relative(0.50, 0.89, after_sleep=1))
+            if not self.wait_until(self.in_team_and_world, time_out=10, raise_if_not_found=False,
+                                   post_action=lambda: self.click_relative(0.50, 0.89, after_sleep=1)):
+                # 邮件/奖励等界面可能误匹配到月卡模板。没回到大世界就不要标记为已处理,
+                # 否则外层 ensure_main 的超时预算会被这里耗尽并误报"不在大世界".
+                logger.info('monthly_card found but not back to world, skip mark handled')
+                return False
             # self.screenshot('monthly_card3')
             self.set_check_monthly_card(next_day=True)
         # logger.debug(f'check_monthly_card {monthly_card}')

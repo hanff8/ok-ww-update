@@ -259,14 +259,16 @@ class DailyTask(WWOneTimeTask, BaseCombatTask):
             self.click(0.885, 0.250, after_sleep=2)
         self.log_info(self.tr('claim daily reward via  coordinate'))
         self.click(0.930, 0.882, after_sleep=1)
-        self.ensure_main(time_out=10)
+        # 月卡弹窗处理本身最坏要 2+2+10 秒, 预算太小会直接误报不在大世界
+        self.ensure_main(time_out=60)
 
     def claim_mail(self):
         self.info_set('current task', 'claim mail')
         self.back(after_sleep=1.5)
         self.click(0.64, 0.95, after_sleep=1)
         self.click(0.14, 0.9, after_sleep=1)
-        self.ensure_main(time_out=10)
+        # 月卡弹窗处理本身最坏要 2+2+10 秒, 预算太小会直接误报不在大世界
+        self.ensure_main(time_out=60)
 
 
 from ok import run_task
