@@ -8,7 +8,7 @@ from src.game_launcher import get_game_launch_arguments
 from src.task.process_feature import process_feature
 from src.task.task_icons import task_icon
 
-version = "v3.8.4-rc.1"
+version = "v3.8.6-alpha"
 
 
 def _find_most_recently_run_pc_exe():
@@ -280,6 +280,8 @@ config = {
     'launcher_error_log_file': 'logs/launcher_error.log',
     'version': version,
     'onetime_tasks': [  # tasks to execute
+        ["src.task.GalGameTask", "GalGameTask"],
+        ["src.task.RahaiBlocksTask", "RahaiBlocksTask"],
         ["src.task.DailyTask", "DailyTask"],
         ["src.task.FarmEchoTask", "FarmEchoTask"],
         ["src.task.NightmareNestTask", "NightmareNestTask"],
